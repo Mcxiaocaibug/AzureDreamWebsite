@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    overflow-x: hidden; /* 隐藏水平滚动条 */
+    font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 至少填满整个视口高度 */
+    padding: 20px; /* 添加内边距 */
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px; /* 设置最大宽度 */
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    margin-bottom: 20px; /* 卡片间距 */
+}
+
+h1 {
+    font-size: 3.5em;
+    margin-bottom: 0.5em;
+    color: #f39c12;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+    color: #ddd;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 0.8em;
+    color: #f39c12;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.button {
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none; /* 去除链接下划线 */
+    display: inline-block; /* 让链接像块级元素一样 */
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #e67e22;
+}
+
+.admin-list, .player-list {
+    display: flex;
+    justify-content: space-around; /* 水平分布 */
+    flex-wrap: wrap; /* 自动换行 */
+}
+
+.admin, .player {
+    width: 200px; /* 固定宽度 */
+    margin: 10px;
+    text-align: center;
+}
+
+.admin img, .player img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* 圆形头像 */
+    margin-bottom: 10px;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .glass-card {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    .subtitle {
+        font-size: 1.2em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .admin-list,
+    .player-list {
+        justify-content: center; /* 小屏幕居中 */
+    }
+}
