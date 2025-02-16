@@ -1,8 +1,8 @@
-import * as THREE from 'three';
+import * as THREE from 'https://cdn.skypack.dev/three@0.137.0'; // 使用 CDN
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), antialias: true }); // 开启抗锯齿
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), antialias: true });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.z = 1;
