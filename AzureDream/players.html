@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优秀玩家 - AzureDream</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/players.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Power+Grotesk:wght@400&display=swap">
+</head>
+<body>
+    <div class="blur-overlay"></div>
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">AzureDream</div>
+            <div class="nav-links">
+                <a href="index.html">主页</a>
+                <a href="about.html">服务器简介</a>
+                <a href="join.html">加入方式</a>
+                <a href="players.html" class="active">优秀玩家</a>
+                <a href="staff.html">管理团队</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="players-container">
+        <section class="players-hero animate-on-scroll">
+            <h1>优秀玩家展示</h1>
+            <p class="subtitle">他们用创意与热情点亮服务器</p>
+        </section>
+
+        <section class="player-categories">
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="builders">建筑师</button>
+                <button class="tab-btn" data-category="redstone">红石工程师</button>
+                <button class="tab-btn" data-category="explorers">探险家</button>
+                <button class="tab-btn" data-category="artists">艺术家</button>
+            </div>
+
+            <div class="player-grid active" id="builders">
+                <div class="player-card animate-on-scroll">
+                    <div class="player-avatar">
+                        <img src="images/players/builder1.png" alt="建筑师玩家">
+                    </div>
+                    <h3>DreamBuilder</h3>
+                    <p class="player-title">顶级建筑师</p>
+                    <p class="player-description">专注于未来主义建筑，作品充满科技感</p>
+                    <div class="player-achievements">
+                        <span class="achievement">最佳建筑奖</span>
+                        <span class="achievement">创意之星</span>
+                    </div>
+                </div>
+                <!-- 更多建筑师卡片 -->
+            </div>
+
+            <div class="player-grid" id="redstone">
+                <div class="player-card animate-on-scroll">
+                    <div class="player-avatar">
+                        <img src="images/players/redstone1.png" alt="红石工程师">
+                    </div>
+                    <h3>RedMaster</h3>
+                    <p class="player-title">红石专家</p>
+                    <p class="player-description">创造了多个复杂的自动化系统</p>
+                    <div class="player-achievements">
+                        <span class="achievement">技术创新奖</span>
+                        <span class="achievement">效率之王</span>
+                    </div>
+                </div>
+                <!-- 更多红石工程师卡片 -->
+            </div>
+
+            <div class="player-grid" id="explorers">
+                <!-- 探险家卡片 -->
+            </div>
+
+            <div class="player-grid" id="artists">
+                <!-- 艺术家卡片 -->
+            </div>
+        </section>
+
+        <section class="hall-of-fame animate-on-scroll">
+            <h2>名人堂</h2>
+            <div class="fame-grid">
+                <div class="fame-card">
+                    <div class="fame-avatar">
+                        <img src="images/players/fame1.png" alt="名人堂玩家">
+                        <div class="fame-crown"></div>
+                    </div>
+                    <h3>LegendaryPlayer</h3>
+                    <p>服务器第一位达到1000天在线时长的玩家</p>
+                </div>
+                <!-- 更多名人堂卡片 -->
+            </div>
+        </section>
+    </main>
+
+    <div id="shader-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+    <script>
+        // 检查 Three.js 是否正确加载
+        window.addEventListener('load', () => {
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js 加载失败');
+                return;
+            }
+            console.log('Three.js 版本:', THREE.REVISION);
+        });
+    </script>
+    <script src="js/shader.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/players.js"></script>
+</body>
+</html> 

@@ -1,0 +1,233 @@
+.staff-container {
+    padding-top: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 2rem 2rem;
+}
+
+.staff-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.staff-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.staff-hierarchy {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.owner-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.staff-card {
+    background: var(--glass-background);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.staff-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.staff-card.owner {
+    background: linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(100, 210, 255, 0.1));
+    border: 2px solid var(--primary-color);
+    max-width: 400px;
+}
+
+.staff-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.staff-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.staff-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 3px solid white;
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.owner-badge {
+    background-image: url('../images/crown.png');
+    background-color: #FFD700;
+}
+
+.admin-badge {
+    background-image: url('../images/admin.png');
+    background-color: var(--primary-color);
+}
+
+.mod-badge {
+    background-image: url('../images/mod.png');
+    background-color: var(--secondary-color);
+}
+
+.staff-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.staff-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.staff-description {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.staff-contact {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.contact-link {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: var(--glass-background);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.staff-responsibilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.responsibility {
+    background: rgba(0, 122, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.join-staff {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem;
+    background: var(--glass-background);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.join-staff h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.join-staff p {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+.apply-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.apply-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .staff-container {
+        padding-top: 100px;
+    }
+
+    .staff-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-card.owner {
+        margin: 0 auto;
+    }
+
+    .staff-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .staff-badge {
+        width: 30px;
+        height: 30px;
+    }
+} 
