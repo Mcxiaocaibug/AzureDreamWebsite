@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AzureDream - AI驱动的未来级Minecraft服务器</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+    <div class="blur-overlay"></div>
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">AzureDream</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">主页</a>
+                <a href="about.html">服务器简介</a>
+                <a href="join.html">加入方式</a>
+                <a href="players.html">优秀玩家</a>
+                <a href="staff.html">管理团队</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>由AI驱动的<span class="hollow-text">Minecraft</span>服务器</h1>
+                <h2>来自蔚蓝未来</h2>
+                <p>体验下一代游戏服务器，感受AI带来的无限可能</p>
+                <div class="cta-buttons">
+                    <a href="join.html" class="cta-primary">立即加入</a>
+                    <a href="about.html" class="cta-secondary">了解更多</a>
+                </div>
+            </div>
+            <div id="shader-container"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="copyright">Copyright © 2025 AzureDream All rights reserved.</div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+    <script>
+        // 检查 Three.js 是否正确加载
+        window.addEventListener('load', () => {
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js 加载失败');
+                return;
+            }
+            console.log('Three.js 版本:', THREE.REVISION);
+        });
+    </script>
+    <script src="js/shader.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 

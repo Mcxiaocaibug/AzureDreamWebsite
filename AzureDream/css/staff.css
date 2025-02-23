@@ -1,0 +1,262 @@
+.staff-container {
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 2rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.staff-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.staff-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    mix-blend-mode: difference;
+}
+
+.staff-hierarchy {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    mix-blend-mode: difference;
+}
+
+.owner-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.staff-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    mix-blend-mode: difference;
+}
+
+.staff-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.staff-card.owner {
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.staff-avatar {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.staff-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.staff-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    mix-blend-mode: screen;
+}
+
+.owner-badge {
+    background-image: url('../images/crown.png');
+    background-color: #FFD700;
+}
+
+.admin-badge {
+    background-image: url('../images/admin.png');
+    background-color: var(--primary-color);
+}
+
+.mod-badge {
+    background-image: url('../images/mod.png');
+    background-color: var(--secondary-color);
+}
+
+.staff-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.staff-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.staff-description {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.staff-contact {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.contact-link {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+    mix-blend-mode: screen;
+}
+
+.contact-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.contact-link:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 4px rgba(0, 122, 255, 0.4);
+}
+
+.staff-responsibilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.responsibility {
+    background: rgba(0, 122, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.join-staff {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    mix-blend-mode: screen;
+}
+
+.join-staff h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    mix-blend-mode: difference;
+}
+
+.join-staff p {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.apply-btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+    mix-blend-mode: screen;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.apply-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+}
+
+.apply-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0, 122, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .staff-container {
+        padding-top: 100px;
+    }
+
+    .staff-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .staff-card.owner {
+        margin: 0 auto;
+    }
+
+    .staff-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .staff-badge {
+        width: 30px;
+        height: 30px;
+    }
+} 
