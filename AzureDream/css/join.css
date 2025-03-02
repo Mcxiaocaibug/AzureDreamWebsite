@@ -1,0 +1,287 @@
+.join-container {
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 120px 2rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.join-hero {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.join-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    mix-blend-mode: difference;
+}
+
+.join-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.step-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.step-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.step-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.15);
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateZ(20px);
+}
+
+.step-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: translateZ(20px);
+}
+
+.step-details {
+    margin-top: 1rem;
+    transform: translateZ(10px);
+}
+
+.step-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.step-details li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.step-details li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.server-address {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.server-address code {
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    mix-blend-mode: difference;
+}
+
+.copy-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
+    mix-blend-mode: screen;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.copy-btn:active {
+    transform: translateY(1px);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.requirements {
+    text-align: center;
+    margin-top: 4rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.requirements h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #FFFFFF;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.requirement-item {
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    color: #FFFFFF;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 1;
+    border: none;
+}
+
+.requirement-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.requirement-item::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(90deg, 
+        #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff
+    );
+    background-size: 400% 400%;
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 1;
+    animation: rainbowMove 6s linear infinite;
+    transition: all 0.3s ease;
+}
+
+.requirement-item::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: rgba(20, 20, 40, 0.9);
+    border-radius: 18px;
+    z-index: -1;
+}
+
+.requirement-item:hover::before {
+    animation: rainbowMove 3s linear infinite;
+    filter: brightness(1.2);
+}
+
+@keyframes rainbowMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.requirement-item h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #FFFFFF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transform: translateZ(20px);
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.requirement-item p {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    transform: translateZ(10px);
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .join-container {
+        padding-top: 70px;
+        padding-bottom: 60px;
+    }
+
+    .join-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .join-steps {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .requirements h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .requirements-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .step-number {
+        font-size: 2.5rem;
+    }
+
+    .step-card {
+        padding: 1.5rem;
+    }
+    
+    .step-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .server-address {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .requirement-item {
+        padding: 1.5rem;
+    }
+} 
