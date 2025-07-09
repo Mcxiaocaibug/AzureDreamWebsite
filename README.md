@@ -1,5 +1,12 @@
 # AzureDream Minecraft 服务器官网
 
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
+
+**CDN acceleration and security protection for this project are sponsored by Tencent EdgeOne.**
+**Just click on the image to visit EdgeOne**
+
+[![Powered by EdgeOne](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)](https://edgeone.ai/?from=github "Best Asian CDN, Edge, and Secure Solutions - Tencent EdgeOne")
+
 这是一个现代化的 Minecraft 服务器官方网站，采用了最新的网页设计技术，包括动态着色器、毛玻璃效果和流畅的动画效果。
 
 ## 特点
@@ -27,22 +34,21 @@ AzureDream/
 ├── index.html          # 主页
 ├── about.html         # 服务器简介
 ├── join.html          # 加入方式
-├── players.html       # 优秀玩家
+├── hall-of-fame.html  # 名人堂
 ├── staff.html         # 管理团队
 ├── css/
 │   ├── style.css      # 全局样式
 │   ├── nav.css        # 导航栏样式
 │   ├── about.css      # 简介页样式
 │   ├── join.css       # 加入页样式
-│   ├── players.css    # 玩家页样式
+│   ├── hall-of-fame.css # 名人堂页样式
 │   └── staff.css      # 管理团队页样式
 ├── js/
 │   ├── main.js        # 主要脚本
 │   ├── shader.js      # Shader 效果
-│   ├── players.js     # 玩家页面脚本
+│   ├── hall-of-fame.js # 名人堂页面脚本
 │   └── staff.js       # 管理团队页面脚本
 └── images/            # 图片资源目录
-    ├── players/       # 玩家头像
     └── staff/         # 管理团队头像
 ```
 
@@ -50,7 +56,7 @@ AzureDream/
 
 1. 克隆仓库：
    ```bash
-   git clone https://github.com/yourusername/AzureDream.git
+   git clone https://github.com/Mcxiaocaibug/AzureDreamWebsite.git
    ```
 
 2. 安装依赖：
@@ -131,4 +137,4 @@ MIT License
 
 - Email: your.email@example.com
 - Discord: your_discord_server
-- GitHub Issues 
+- GitHub Issues
