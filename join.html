@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>加入我们 - AzureDream</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/join.css">
+</head>
+<body>
+    <div class="blur-overlay"></div>
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img">
+                AzureDream
+            </div>
+            <div class="nav-links">
+                <a href="index.html">主页</a>
+                <a href="about.html">服务器简介</a>
+                <a href="join.html" class="active">加入方式</a>
+                <a href="hall-of-fame.html">名人堂</a>
+                <a href="staff.html">管理团队</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="join-container">
+        <section class="join-hero animate-on-scroll">
+            <h1>加入 AzureDream</h1>
+            <p class="subtitle">开启你的AI驱动Minecraft之旅</p>
+        </section>
+
+        <section class="join-steps animate-on-scroll">
+            <div class="step-card">
+                <h3>第一步：加入QQ群</h3>
+                <p>群号：974782827</p>
+                <a href="https://qm.qq.com/q/yTFgbREpDW" class="cta-primary" target="_blank" rel="noopener noreferrer">点击加群</a>
+            </div>
+            <div class="step-card">
+                <h3>第二步：阅读群规</h3>
+                <p>在加入前，请仔细阅读群内的规则公告，以获得最佳游戏体验。</p>
+            </div>
+            <div class="step-card">
+                <h3>第三步：连接服务器</h3>
+                <p>服务器地址：<strong id="server-address">miku.click:10669</strong></p>
+                <button id="copy-btn" class="cta-secondary">复制地址</button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="copyright">Copyright © 2025 AzureDream All rights reserved.</div>
+    </footer>
+
+    <div id="shader-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+    <script>
+        // 检查 Three.js 是否正确加载
+        window.addEventListener('load', () => {
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js 加载失败');
+                return;
+            }
+            console.log('Three.js 版本:', THREE.REVISION);
+        });
+    </script>
+    <script src="js/shader.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/card-effects.js"></script>
+</body>
+</html>

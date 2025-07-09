@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>服务器简介 - AzureDream</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+    <div class="blur-overlay"></div>
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img">
+                AzureDream
+            </div>
+            <div class="nav-links">
+                <a href="index.html">主页</a>
+                <a href="about.html" class="active">服务器简介</a>
+                <a href="join.html">加入方式</a>
+                <a href="hall-of-fame.html">名人堂</a>
+                <a href="staff.html">管理团队</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="about-container">
+        <section class="about-hero animate-on-scroll">
+            <h1>关于 AzureDream</h1>
+            <p class="subtitle">探索由AI驱动的全新Minecraft体验</p>
+        </section>
+
+        <section class="features animate-on-scroll">
+            <div class="feature-card">
+                <img src="images/azure-ai.png" alt="Azure智能" class="feature-icon">
+                <h3>Azure智能</h3>
+                <p>服务器内集成AI插件与机器人，提供前所未有的智能交互体验</p>
+            </div>
+            <div class="feature-card">
+                <h3>养老插件</h3>
+                <p>丰富的休闲与便利性插件，打造轻松愉快的游戏体验</p>
+            </div>
+            <div class="feature-card">
+                <h3>Leaves生电服务端</h3>
+                <p>基于高性能Leaves核心，为红石和生存电路提供稳定支持</p>
+            </div>
+        </section>
+
+        <section class="server-info animate-on-scroll">
+            <h2>服务器特色</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>高性能保障</h4>
+                    <p>采用最新服务器架构，确保流畅的游戏体验</p>
+                </div>
+                <div class="info-item">
+                    <h4>创新玩法</h4>
+                    <p>独特的AI驱动游戏机制，带来全新游戏体验</p>
+                </div>
+                <div class="info-item">
+                    <h4>社区互动</h4>
+                    <p>活跃的玩家社区，丰富的社交活动</p>
+                </div>
+                <div class="info-item">
+                    <h4>安全保障</h4>
+                    <p>先进的反作弊系统，维护公平游戏环境</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="copyright">Copyright © 2025 AzureDream All rights reserved.</div>
+    </footer>
+
+    <div id="shader-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+    <script>
+        // 检查 Three.js 是否正确加载
+        window.addEventListener('load', () => {
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js 加载失败');
+                return;
+            }
+            console.log('Three.js 版本:', THREE.REVISION);
+        });
+    </script>
+    <script src="js/shader.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/card-effects.js"></script>
+</body>
+</html>

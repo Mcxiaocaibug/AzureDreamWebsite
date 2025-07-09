@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>管理团队 - AzureDream</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/staff.css">
+</head>
+<body>
+    <div class="blur-overlay"></div>
+    <nav class="glass-nav">
+        <div class="nav-content">
+            <div class="logo">
+                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img">
+                AzureDream
+            </div>
+            <div class="nav-links">
+                <a href="index.html">主页</a>
+                <a href="about.html">服务器简介</a>
+                <a href="join.html">加入方式</a>
+                <a href="hall-of-fame.html">名人堂</a>
+                <a href="staff.html" class="active">管理团队</a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="staff-container">
+        <section class="staff-hero animate-on-scroll">
+            <h1>管理团队</h1>
+            <p class="subtitle">为玩家提供最优质的游戏体验</p>
+        </section>
+
+        <section class="staff-hierarchy">
+            <h2 class="section-title animate-on-scroll">管理团队</h2>
+            <div class="staff-grid">
+                <div class="staff-card animate-on-scroll">
+                    <div class="staff-avatar">
+                        <img src="images/staff/rmanagarmr.png" alt="RManagarmr">
+                    </div>
+                    <h3>RManagarmr</h3>
+                    <p class="staff-title">服务器管理员</p>
+                    <p class="staff-description">负责服务器日常运营与维护</p>
+                </div>
+
+                <div class="staff-card animate-on-scroll">
+                    <div class="staff-avatar">
+                        <img src="images/staff/mcxiaocai666.png" alt="Mcxiaocai666">
+                    </div>
+                    <h3>Mcxiaocai666</h3>
+                    <p class="staff-title">技术支持</p>
+                    <p class="staff-description">提供技术援助与问题解决</p>
+                </div>
+
+                <div class="staff-card animate-on-scroll">
+                    <div class="staff-avatar">
+                        <img src="images/staff/tanzeus.png" alt="Tanzeus">
+                    </div>
+                    <h3>Tanzeus</h3>
+                    <p class="staff-title">社区协调员</p>
+                    <p class="staff-description">负责社区活动与玩家互动</p>
+                </div>
+            </div>
+        </section>
+        </section>
+
+        <section class="join-staff animate-on-scroll">
+            <h2>加入我们</h2>
+            <p>我们始终在寻找有热情、有能力的玩家加入管理团队</p>
+            <a href="#" class="apply-btn">申请成为管理团队</a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="copyright">Copyright © 2025 AzureDream All rights reserved.</div>
+    </footer>
+
+    <div id="shader-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+    <script>
+        // 检查 Three.js 是否正确加载
+        window.addEventListener('load', () => {
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js 加载失败');
+                return;
+            }
+            console.log('Three.js 版本:', THREE.REVISION);
+        });
+    </script>
+    <script src="js/shader.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/staff.js"></script>
+    <script src="js/card-effects.js"></script>
+</body>
+</html>
