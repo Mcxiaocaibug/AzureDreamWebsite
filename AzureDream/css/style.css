@@ -309,6 +309,19 @@ p {
     margin-top: 0.3rem;
 }
 
+/* 强制 Footer 中的外链颜色与装饰，覆盖浏览器默认 visited 样式 */
+.footer a:link,
+.footer a:visited,
+.footer .netlify-link,
+.footer .netlify-link:link,
+.footer .netlify-link:visited,
+.footer .netlify-link:hover,
+.footer .netlify-link:focus,
+.footer .netlify-link:active {
+    color: rgba(255, 255, 255, 0.78) !important;
+    text-decoration: none !important;
+}
+
 /* Netlify 徽章与链接：在不同环境下强约束尺寸，避免因继承/缩放导致放大 */
 .netlify-link {
     display: inline-flex;
