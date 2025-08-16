@@ -1,0 +1,23 @@
+# Netlify configuration for AzureDream static site
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Pure static site: no build step is required
+  command = ""
+  # Publish directory points to the AzureDream subfolder containing the site files
+  publish = "AzureDream"
+
+[dev]
+  # Make `netlify dev` serve from the same directory for local development
+  publish = "AzureDream"
+
+# Optional: Add headers or redirects later if needed. For example:
+# [[headers]]
+#   for = "/*"
+#   [headers.values]
+#     Cache-Control = "public, max-age=3600"
+# [[redirects]]
+#   from = "/about"
+#   to = "/about.html"
+#   status = 200
+
