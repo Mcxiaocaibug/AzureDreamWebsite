@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 简洁小型皇冠图标，用于名人堂头像叠加 -->
+  <path d="M6 44 L10 20 L24 34 L32 18 L40 34 L54 20 L58 44 Z" fill="#FFD54F"/>
+  <path d="M8 44 H56 V50 C56 52.2091 54.2091 54 52 54 H12 C9.79086 54 8 52.2091 8 50 V44 Z" fill="#FBC02D"/>
+  <circle cx="10" cy="20" r="3" fill="#FFF59D"/>
+  <circle cx="32" cy="18" r="3" fill="#FFF59D"/>
+  <circle cx="54" cy="20" r="3" fill="#FFF59D"/>
+</svg>
+
