@@ -310,15 +310,31 @@ p {
 }
 
 /* 强制 Footer 中的外链颜色与装饰，覆盖浏览器默认 visited 样式 */
-.footer a:link,
-.footer a:visited,
-.footer .netlify-link,
+/* 使用最高特异性选择器，确保在所有环境下都能覆盖默认样式 */
+.footer .powered-by a[href*="netlify"]:link,
+.footer .powered-by a[href*="netlify"]:visited,
+.footer .powered-by a[href*="netlify"]:hover,
+.footer .powered-by a[href*="netlify"]:focus,
+.footer .powered-by a[href*="netlify"]:active,
 .footer .netlify-link:link,
 .footer .netlify-link:visited,
 .footer .netlify-link:hover,
 .footer .netlify-link:focus,
-.footer .netlify-link:active {
-    color: rgba(255, 255, 255, 0.78) !important;
+.footer .netlify-link:active,
+.footer a:link,
+.footer a:visited {
+    color: rgba(255, 255, 255, 0.65) !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
+    text-decoration-line: none !important;
+    text-decoration-color: transparent !important;
+}
+/* 额外的强制覆盖，针对可能的浏览器特殊情况 */
+footer a[target="_blank"]:visited,
+footer a[rel*="noopener"]:visited,
+a[href="https://www.netlify.com"]:visited,
+a[href="https://www.netlify.com"]:link {
+    color: rgba(255, 255, 255, 0.65) !important;
     text-decoration: none !important;
 }
 
