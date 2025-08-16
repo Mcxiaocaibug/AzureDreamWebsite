@@ -309,6 +309,7 @@ p {
     margin-top: 0.3rem;
 }
 
+/* Netlify 徽章与链接：在不同环境下强约束尺寸，避免因继承/缩放导致放大 */
 .netlify-link {
     display: inline-flex;
     align-items: center;
@@ -316,9 +317,11 @@ p {
     color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
     font-size: 0.7rem;
-    transition: all 0.3s ease;
+    line-height: 1; /* 避免行高扩大图片区域 */
+    transition: color 0.3s ease;
     text-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
     font-weight: 400;
+    position: relative;
 }
 
 .netlify-link:hover {
@@ -327,11 +330,18 @@ p {
 }
 
 .netlify-logo {
-    height: 12px;
-    width: auto;
+    /* 显式约束尺寸，防止某些浏览器/环境忽略外部样式导致异常放大 */
+    display: inline-block;
+    height: 12px !important; /* 双保险：强制高度 */
+    max-height: 12px;
+    width: auto !important;
+    max-width: 120px; /* 上限，避免误放大 */
+    vertical-align: middle;
     opacity: 0.6;
     transition: opacity 0.3s ease;
     filter: brightness(0) invert(1);
+    transform: none !important; /* 防止继承到父级 transform */
+    object-fit: contain;
 }
 
 .netlify-link:hover .netlify-logo {
