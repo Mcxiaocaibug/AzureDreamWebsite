@@ -1,0 +1,27 @@
+{
+    "name": "AzureDream - AI驱动的Minecraft服务器",
+    "short_name": "AzureDream",
+    "description": "体验下一代游戏服务器，感受AI带来的无限可能",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000814",
+    "theme_color": "#000814",
+    "orientation": "any",
+    "lang": "zh-CN",
+    "dir": "ltr",
+    "icons": [
+        {
+            "src": "/images/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/images/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
+

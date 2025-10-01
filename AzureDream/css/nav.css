@@ -57,6 +57,12 @@
     position: relative;
     transition: color 0.3s ease;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-sm);
+}
+
+.nav-links a:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 4px;
 }
 
 .nav-links.liquidGlass-wrapper .liquidGlass-text {
@@ -127,6 +133,15 @@
     cursor: pointer;
     flex-direction: column;
     gap: 5px;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+}
+
+.menu-toggle:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
 }
 
 .menu-toggle span {
@@ -134,6 +149,7 @@
     height: 3px;
     background-color: #FFFFFF;
     transition: all 0.3s ease;
+    display: block;
 }
 
 @media (max-width: 768px) {

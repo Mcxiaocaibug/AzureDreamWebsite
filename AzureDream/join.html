@@ -2,16 +2,22 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="description" content="加入AzureDream服务器：加入QQ群974782827，阅读群规，连接服务器miku.click:10669。开启你的AI驱动Minecraft之旅！">
+    <meta name="theme-color" content="#000814">
     <title>加入我们 - AzureDream</title>
+    
+    <link rel="canonical" href="https://azuredream.tech/join.html">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preload" href="fonts/PowerGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/MiSans-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="images/logo.png" as="image">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/join.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">跳转到主内容</a>
     <!-- SVG Filter for Liquid Glass Effect -->
     <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
         <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
@@ -31,28 +37,28 @@
     </svg>
     
     <div class="blur-overlay"></div>
-    <nav class="glass-nav liquid-glass liquid-glass--static">
+    <nav class="glass-nav liquid-glass liquid-glass--static" role="navigation" aria-label="主导航">
         <div class="nav-content">
             <div class="logo">
                 <img src="images/logo.png" alt="AzureDream Logo" class="logo-img" width="40" height="40" decoding="async" fetchpriority="high">
-                AzureDream
+                <span>AzureDream</span>
             </div>
             <div class="nav-links liquidGlass-wrapper dock">
                 <a href="index.html">主页</a>
                 <a href="about.html">服务器简介</a>
-                <a href="join.html" class="active">加入方式</a>
+                <a href="join.html" class="active" aria-current="page">加入方式</a>
                 <a href="hall-of-fame.html">名人堂</a>
                 <a href="staff.html">管理团队</a>
             </div>
-            <div class="menu-toggle">
+            <button class="menu-toggle" aria-label="切换导航菜单" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
-    <main class="join-container">
+    <main id="main-content" class="join-container" role="main">
         <section class="join-hero animate-on-scroll liquid-glass liquid-glass--panel">
             <h1>加入 AzureDream</h1>
             <p class="subtitle">开启你的AI驱动Minecraft之旅</p>
@@ -79,22 +85,12 @@
 
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="copyright">Copyright © 2025 AzureDream All rights reserved.</div>
     </footer>
 
     <div id="shader-container"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js" defer></script>
-    <script>
-        // 检查 Three.js 是否正确加载
-        window.addEventListener('load', () => {
-            if (typeof THREE === 'undefined') {
-                console.error('Three.js 加载失败');
-                return;
-            }
-            console.log('Three.js 版本:', THREE.REVISION);
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js" defer crossorigin="anonymous" integrity="sha512-qVEOwI/BtiSPoJ5JUbJLsAYIcNNUeVPQksOgNiMvDLRu5+bPWqEMbCKLjz3dOaHKw9P/RBzGj/BBnXp8LH0Cag==" referrerpolicy="no-referrer"></script>
     <script src="js/shader.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/card-effects.js" defer></script>

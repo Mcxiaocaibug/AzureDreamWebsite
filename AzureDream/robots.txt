@@ -1,0 +1,10 @@
+# robots.txt for AzureDream
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://azuredream.tech/sitemap.xml
+
+# Disallow certain paths (if any)
+Disallow: /Example/
+

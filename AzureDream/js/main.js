@@ -136,14 +136,36 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(element);
     });
 
-    // Mobile menu toggle
+    // Mobile menu toggle with accessibility
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinksContainer = document.querySelector('.nav-links');
 
     if (menuToggle && navLinksContainer) {
         menuToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
+            const isExpanded = navLinksContainer.classList.toggle('active');
             menuToggle.classList.toggle('active');
+            
+            // Update ARIA attributes
+            menuToggle.setAttribute('aria-expanded', isExpanded);
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinksContainer.contains(e.target)) {
+                navLinksContainer.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinksContainer.classList.contains('active')) {
+                navLinksContainer.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.focus();
+            }
         });
     }
 
@@ -158,8 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     copyBtn.innerText = '复制地址';
                 }, 2000);
-            }).catch(err => {
-                console.error('无法复制地址: ', err);
+            }).catch(() => {
+                // Silently fail if clipboard not available
+                copyBtn.innerText = '复制失败';
+                setTimeout(() => {
+                    copyBtn.innerText = '复制地址';
+                }, 2000);
             });
         });
     }

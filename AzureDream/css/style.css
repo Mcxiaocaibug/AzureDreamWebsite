@@ -7,15 +7,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'MiSans';
-    src: url('../fonts/MiSans-ExtraLight.woff2') format('woff2'),
-         url('../fonts/MiSans-ExtraLight.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
 :root {
     --primary-color: rgba(255, 255, 255, 0.8);
     --secondary-color: rgba(255, 255, 255, 0.6);
@@ -37,13 +28,54 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Power Grotesk', 'MiSans', sans-serif;
+    font-family: 'Power Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
 html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+/* Skip link for accessibility */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 1rem;
+    outline: 3px solid #FFF;
+    outline-offset: 2px;
+}
+
+/* Global focus styles for accessibility */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+}
+
+/* Improve button accessibility */
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 body {
@@ -330,6 +362,13 @@ p {
     background: transparent;
     will-change: transform;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-primary:focus-visible,
+.cta-secondary:focus-visible,
+.liquidGlass-wrapper:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
 }
 
 .cta-secondary,

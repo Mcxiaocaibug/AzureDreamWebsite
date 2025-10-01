@@ -10,36 +10,67 @@ const fragmentShader = `
     uniform float time;
     uniform vec2 resolution;
     varying vec2 vUv;
-
-    vec3 spectral_colour(float l) {
-        float r=0.0,g=0.0,b=0.0;
-        if ((l>=400.0)&&(l<410.0)) { float t=(l-400.0)/(410.0-400.0); r=    +(0.33*t)-(0.20*t*t); }
-        else if ((l>=410.0)&&(l<475.0)) { float t=(l-410.0)/(475.0-410.0); r=0.14         -(0.13*t*t); }
-        else if ((l>=545.0)&&(l<595.0)) { float t=(l-545.0)/(595.0-545.0); r=    +(1.98*t)-(     t*t); }
-        else if ((l>=595.0)&&(l<650.0)) { float t=(l-595.0)/(650.0-595.0); r=0.98+(0.06*t)-(0.40*t*t); }
-        else if ((l>=650.0)&&(l<700.0)) { float t=(l-650.0)/(700.0-650.0); r=0.65-(0.84*t)+(0.20*t*t); }
-        if ((l>=415.0)&&(l<475.0)) { float t=(l-415.0)/(475.0-415.0); g=             +(0.80*t*t); }
-        else if ((l>=475.0)&&(l<590.0)) { float t=(l-475.0)/(590.0-475.0); g=0.8 +(0.76*t)-(0.80*t*t); }
-        else if ((l>=585.0)&&(l<639.0)) { float t=(l-585.0)/(639.0-585.0); g=0.82-(0.80*t)           ; }
-        if ((l>=400.0)&&(l<475.0)) { float t=(l-400.0)/(475.0-400.0); b=    +(2.20*t)-(1.50*t*t); }
-        else if ((l>=475.0)&&(l<560.0)) { float t=(l-475.0)/(560.0-475.0); b=0.7 -(     t)+(0.30*t*t); }
-        return vec3(r,g,b);
+    
+    float opSmoothUnion(float d1, float d2, float k) {
+        float h = clamp(0.5 + 0.5 * (d2 - d1) / k, 0.0, 1.0);
+        return mix(d2, d1, h) - k * h * (1.0 - h);
     }
-
-    void main() {
-        vec2 p = (2.0 * vUv - 1.0) * 2.0;
-        p.x *= resolution.x/resolution.y;
-
-        for(int i=0; i<8; i++) {
-            vec2 newp = vec2(
-                p.y + cos(p.x + time) - sin(p.y * cos(time * 0.2)),
-                p.x - sin(p.y - time) - cos(p.x * sin(time * 0.3))
+    
+    float sdSphere(vec3 p, float s) {
+        return length(p) - s;
+    } 
+    
+    float map(vec3 p) {
+        float d = 2.0;
+        for (int i = 0; i < 16; i++) {
+            float fi = float(i);
+            float t = time * (fract(fi * 412.531 + 0.513) - 0.5) * 2.0;
+            d = opSmoothUnion(
+                sdSphere(p + sin(t + fi * vec3(52.5126, 64.62744, 632.25)) * vec3(2.0, 2.0, 0.8), 
+                         mix(0.5, 1.0, fract(fi * 412.531 + 0.5124))),
+                d,
+                0.4
             );
-            p = newp;
         }
-
-        vec3 color = spectral_colour(p.y * 50.0 + 500.0 + sin(time * 0.6));
-        gl_FragColor = vec4(color, 1.0);
+        return d;
+    }
+    
+    vec3 calcNormal(in vec3 p) {
+        const float h = 1e-5;
+        const vec2 k = vec2(1, -1);
+        return normalize(k.xyy * map(p + k.xyy * h) + 
+                         k.yyx * map(p + k.yyx * h) + 
+                         k.yxy * map(p + k.yxy * h) + 
+                         k.xxx * map(p + k.xxx * h));
+    }
+    
+    void main() {
+        vec2 fragCoord = vUv * resolution;
+        vec2 uv = fragCoord / resolution.xy;
+        
+        // screen size is 6m x 6m
+        vec3 rayOri = vec3((uv - 0.5) * vec2(resolution.x / resolution.y, 1.0) * 6.0, 3.0);
+        vec3 rayDir = vec3(0.0, 0.0, -1.0);
+        
+        float depth = 0.0;
+        vec3 p;
+        
+        for(int i = 0; i < 64; i++) {
+            p = rayOri + rayDir * depth;
+            float dist = map(p);
+            depth += dist;
+            if (dist < 1e-6) {
+                break;
+            }
+        }
+        
+        depth = min(6.0, depth);
+        vec3 n = calcNormal(p);
+        float b = max(0.0, dot(n, vec3(0.577)));
+        vec3 col = (0.5 + 0.5 * cos((b + time * 3.0) + uv.xyx * 2.0 + vec3(0, 2, 4))) * (0.85 + b * 0.35);
+        col *= exp(-depth * 0.15);
+        
+        gl_FragColor = vec4(col, 1.0);
     }
 `;
 
@@ -59,10 +90,6 @@ class ShaderBackground {
 
     init() {
         try {
-            if (!this.renderer.capabilities.isWebGL2) {
-                console.warn('WebGL 2 不可用，尝试使用 WebGL 1');
-            }
-
             // Use lower pixel ratio for better performance
             const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
             this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -93,7 +120,8 @@ class ShaderBackground {
             });
             this.animate();
         } catch (error) {
-            console.error('Shader 初始化失败:', error);
+            // Silently fail - shader is decorative only
+            return;
         }
     }
 
@@ -122,8 +150,8 @@ class ShaderBackground {
             if (!this._running) return;
             requestAnimationFrame(loop);
             if (this.material) {
-                // Slow down animation slightly for better performance
-                this.material.uniforms.time.value += 0.0015;
+                // Smooth and slow animation for better aesthetics
+                this.material.uniforms.time.value += 0.01;
             }
             this.renderer.render(this.scene, this.camera);
         };
@@ -141,13 +169,12 @@ class ShaderBackground {
 
 window.addEventListener('load', () => {
     if (typeof THREE === 'undefined') {
-        console.error('Three.js 未加载');
-        return;
+        return; // Silently skip if THREE.js not available
     }
     
     try {
         new ShaderBackground();
     } catch (error) {
-        console.error('Shader 背景初始化失败:', error);
+        // Silently fail - shader is decorative only
     }
 });
