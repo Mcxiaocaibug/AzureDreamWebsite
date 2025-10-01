@@ -1,15 +1,16 @@
 .staff-container {
     min-height: 100vh;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 120px 2rem 2rem;
+    padding: 120px clamp(1.5rem, 4vw, 3rem) 3rem;
     position: relative;
     z-index: 1;
 }
 
 .staff-hero {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    padding: clamp(2rem, 4vw, 3rem);
 }
 
 .staff-hero h1 {
@@ -42,29 +43,43 @@
 
 .staff-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .staff-card {
     text-align: center;
+    border-radius: var(--radius-2xl, 28px);
+    --liquid-glass-radius: var(--radius-2xl, 28px);
+}
+
+.staff-card.liquidGlass-wrapper,
+.staff-card.liquidGlass-wrapper > * {
+    border-radius: var(--radius-2xl, 28px);
 }
 
 .staff-avatar {
     width: 120px;
     height: 120px;
     margin: 0 auto 1.5rem;
-    border-radius: 16px; /* 圆角正方形 */
+    border-radius: var(--radius-lg, 20px);
     overflow: hidden;
     border: 3px solid rgba(255, 255, 255, 0.5);
     position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.staff-avatar:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
 }
 
 .staff-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 16px; /* 确保图片本身也是圆角 */
+    border-radius: var(--radius-lg, 20px);
 }
 
 .staff-card h3 {
@@ -97,25 +112,26 @@
 
 .contact-link {
     padding: 0.5rem 1rem;
-    border-radius: 20px;
+    border-radius: var(--radius-lg, 20px);
     background: rgba(255, 255, 255, 0.1);
     color: #FFFFFF;
     text-decoration: none;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(5px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .contact-link:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .contact-link:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 4px rgba(255, 255, 255, 0.4);
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
 }
 
 .staff-responsibilities {
@@ -129,19 +145,21 @@
 .responsibility {
     background: rgba(255, 255, 255, 0.1);
     padding: 0.3rem 0.8rem;
-    border-radius: 15px;
+    border-radius: var(--radius-md, 16px);
     font-size: 0.9rem;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.2s ease;
+}
+
+.responsibility:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
 }
 
 .join-staff {
     text-align: center;
     margin-top: 4rem;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0;
 }
 
 .join-staff h2 {
@@ -159,39 +177,74 @@
 }
 
 .apply-btn {
-    display: inline-block;
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    color: #FFFFFF;
     text-decoration: none;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.apply-btn:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.4);
+.join-staff.liquidGlass-wrapper {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 3rem;
+    align-items: center;
 }
 
-.apply-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5);
+.join-staff.liquidGlass-wrapper .liquidGlass-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    text-align: center;
 }
 
-@media (max-width: 768px) {
+/* Large desktop - 1440px+ */
+@media (min-width: 1440px) {
     .staff-container {
-        padding-top: 70px;
-        padding-bottom: 60px;
+        max-width: 1600px;
+    }
+    
+    .staff-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+}
+
+/* Desktop - 1024px to 1439px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .staff-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Tablet - 768px to 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .staff-container {
+        padding: 100px 2rem 2.5rem;
+    }
+    
+    .staff-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .staff-card {
+        padding: 2rem;
+    }
+}
+
+/* Mobile - up to 767px */
+@media (max-width: 767px) {
+    .staff-container {
+        padding: 90px 1.25rem 2rem;
+    }
+    
+    .staff-hero {
+        padding: 1.75rem;
+        margin-bottom: 2.5rem;
     }
 
     .staff-hero h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
     }
 
     .staff-grid {
@@ -204,8 +257,8 @@
     }
 
     .staff-avatar {
-        width: 100px;
-        height: 100px;
+        width: 110px;
+        height: 110px;
     }
 
     .staff-badge {
@@ -214,24 +267,52 @@
     }
     
     .section-title {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+        font-size: clamp(1.75rem, 5vw, 2rem);
+        margin-bottom: 1.75rem;
     }
     
     .staff-card {
-        padding: 1.5rem;
+        padding: 1.75rem 1.5rem;
+    }
+    
+    .staff-card h3 {
+        font-size: clamp(1.25rem, 4vw, 1.5rem);
     }
     
     .join-staff {
-        padding: 1.5rem;
+        padding: 2rem 1.5rem;
     }
     
     .join-staff h2 {
-        font-size: 2rem;
+        font-size: clamp(1.75rem, 5vw, 2rem);
     }
     
     .apply-btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.9rem 1.6rem;
+        font-size: clamp(0.95rem, 2.75vw, 1.05rem);
+    }
+}
+
+/* Extra small mobile - up to 390px */
+@media (max-width: 390px) {
+    .staff-container {
+        padding: 85px 1rem 1.5rem;
+    }
+    
+    .staff-hero {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .staff-grid {
+        gap: 1.25rem;
+    }
+    
+    .staff-card {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .staff-avatar {
+        width: 95px;
+        height: 95px;
     }
 }

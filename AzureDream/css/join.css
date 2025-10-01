@@ -1,16 +1,17 @@
 .join-container {
     min-height: 100vh;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 120px 2rem 2rem;
+    padding: 120px clamp(1.5rem, 4vw, 3rem) 3rem;
     position: relative;
     z-index: 1;
 }
 
 .join-hero {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
     mix-blend-mode: difference;
+    padding: clamp(2rem, 4vw, 3rem);
 }
 
 .join-hero h1 {
@@ -28,13 +29,20 @@
 
 .join-steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
 .step-card {
     text-align: center;
+    border-radius: var(--radius-2xl, 28px);
+    --liquid-glass-radius: var(--radius-2xl, 28px);
+}
+
+.step-card.liquidGlass-wrapper,
+.step-card.liquidGlass-wrapper > * {
+    border-radius: var(--radius-2xl, 28px);
 }
 
 .step-card h3 {
@@ -52,9 +60,6 @@
 
 #copy-btn {
     margin-top: 1rem;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    cursor: pointer;
 }
 
 .animate-on-scroll {
@@ -68,27 +73,97 @@
     transform: translateY(0);
 }
 
-@media (max-width: 768px) {
+/* Large desktop - 1440px+ */
+@media (min-width: 1440px) {
     .join-container {
-        padding-top: 70px;
-        padding-bottom: 60px;
+        max-width: 1600px;
+    }
+    
+    .join-steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+}
+
+/* Desktop - 1024px to 1439px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .join-steps {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Tablet - 768px to 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .join-container {
+        padding: 100px 2rem 2.5rem;
+    }
+    
+    .join-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .step-card {
+        padding: 2rem;
+    }
+}
+
+/* Mobile - up to 767px */
+@media (max-width: 767px) {
+    .join-container {
+        padding: 90px 1.25rem 2rem;
+    }
+    
+    .join-hero {
+        padding: 1.75rem;
+        margin-bottom: 2.5rem;
     }
 
     .join-hero h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
+        margin-bottom: 0.75rem;
     }
 
     .subtitle {
-        font-size: 1.2rem;
+        font-size: clamp(1rem, 3.5vw, 1.15rem);
     }
 
     .join-steps {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem;
     }
     
     .step-card {
-        padding: 1.5rem;
+        padding: 1.75rem 1.5rem;
+    }
+    
+    .step-card h3 {
+        font-size: clamp(1.25rem, 4vw, 1.5rem);
+    }
+    
+    #server-address {
+        word-break: break-all;
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+    }
+}
+
+/* Extra small mobile - up to 390px */
+@media (max-width: 390px) {
+    .join-container {
+        padding: 85px 1rem 1.5rem;
+    }
+    
+    .join-hero {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .join-steps {
+        gap: 1.25rem;
+    }
+    
+    .step-card {
+        padding: 1.5rem 1.25rem;
     }
 }

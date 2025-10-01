@@ -1,33 +1,22 @@
 .glass-nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem 2rem;
-    background: rgba(25, 25, 25, 0.5);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-bottom: 1px solid transparent; /* Border is created by the pseudo-element */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    top: 1.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(92vw, 1180px);
+    padding: 1rem 1.75rem;
+    border-radius: var(--radius-xl, 24px);
+    --liquid-glass-radius: var(--radius-xl, 24px);
+    overflow: visible;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     z-index: 1000;
-    transition: background 0.3s ease;
+    transition: backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.glass-nav::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-    -webkit-mask: 
-         linear-gradient(#fff 0 0) content-box,
-         linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
+/* Prevent any hover effects on the nav container */
+.glass-nav:hover {
+    transform: translateX(-50%);
 }
 
 .nav-content {
@@ -51,18 +40,64 @@
 .logo-img {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: var(--radius-sm, 12px);
     border: 2px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo-img:hover {
+    transform: scale(1.05) rotate(5deg);
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 .nav-links a {
     color: #FFFFFF;
     text-decoration: none;
-    margin-left: 2rem;
     font-size: 1rem;
     position: relative;
     transition: color 0.3s ease;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.nav-links.liquidGlass-wrapper .liquidGlass-text {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links.liquidGlass-wrapper {
+    cursor: default;
+}
+
+/* Override dock hover effects for navigation */
+.nav-links.liquidGlass-wrapper.dock,
+.nav-links.liquidGlass-wrapper.dock:hover {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-xl, 24px);
+}
+
+.nav-links.liquidGlass-wrapper.dock > div,
+.nav-links.liquidGlass-wrapper.dock:hover > div {
+    border-radius: var(--radius-xl, 24px);
+}
+
+.nav-links.liquidGlass-wrapper .liquidGlass-text a {
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm, 12px);
+    transition: all 0.2s ease;
+}
+
+.nav-links.liquidGlass-wrapper .liquidGlass-text a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Ensure liquid glass layers don't block clicks */
+.nav-links.liquidGlass-wrapper .liquidGlass-effect,
+.nav-links.liquidGlass-wrapper .liquidGlass-tint,
+.nav-links.liquidGlass-wrapper .liquidGlass-shine {
+    pointer-events: none;
 }
 
 .nav-links a:hover,
@@ -103,25 +138,52 @@
 
 @media (max-width: 768px) {
     .glass-nav {
-        padding: 1rem;
+        padding: 0.85rem 1.1rem;
+        width: calc(100% - 1.5rem);
+        border-radius: var(--radius-lg, 20px);
+        top: 0.8rem;
+    }
+    
+    /* Override dock styles for mobile nav */
+    .nav-links.liquidGlass-wrapper.dock,
+    .nav-links.liquidGlass-wrapper.dock:hover {
+        padding: 1rem 0;
+        border-radius: var(--radius-lg, 20px);
     }
 
     .nav-links {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 100%;
+        top: calc(100% + 0.5rem);
         left: 0;
         width: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
         padding: 1rem 0;
-        transform: translateY(-150%);
-        transition: transform 0.3s ease;
+        border-radius: var(--radius-lg, 20px);
+        transform: translateY(-200%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .nav-links.liquidGlass-wrapper .liquidGlass-text {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .nav-links.liquidGlass-wrapper .liquidGlass-text a {
+        display: block;
+        width: 100%;
     }
 
     .nav-links.active {
         transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .nav-links a {

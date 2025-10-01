@@ -48,10 +48,10 @@ class ShaderBackground {
         this.container = document.getElementById('shader-container');
         this.scene = new THREE.Scene();
         this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-        this.renderer = new THREE.WebGLRenderer({ 
-            antialias: true, 
+        this.renderer = new THREE.WebGLRenderer({
+            antialias: true,
             alpha: true,
-            preserveDrawingBuffer: true
+            powerPreference: 'high-performance'
         });
         this.material = null;
         this.init();
@@ -63,8 +63,10 @@ class ShaderBackground {
                 console.warn('WebGL 2 不可用，尝试使用 WebGL 1');
             }
 
+            // Use lower pixel ratio for better performance
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
             this.renderer.setSize(window.innerWidth, window.innerHeight);
-            this.renderer.setPixelRatio(window.devicePixelRatio);
+            this.renderer.setPixelRatio(pixelRatio);
             this.container.appendChild(this.renderer.domElement);
 
             const geometry = new THREE.PlaneGeometry(2, 2);
@@ -82,6 +84,13 @@ class ShaderBackground {
             this.scene.add(mesh);
 
             window.addEventListener('resize', this.onResize.bind(this));
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    this.pause();
+                } else {
+                    this.resume();
+                }
+            });
             this.animate();
         } catch (error) {
             console.error('Shader 初始化失败:', error);
@@ -89,23 +98,44 @@ class ShaderBackground {
     }
 
     onResize() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        
-        this.renderer.setSize(width, height);
-        if (this.material) {
-            this.material.uniforms.resolution.value.set(width, height);
+        // Throttle resize events for better performance
+        if (this._resizeTimeout) {
+            clearTimeout(this._resizeTimeout);
         }
         
-        this.camera.updateProjectionMatrix();
+        this._resizeTimeout = setTimeout(() => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            this.renderer.setSize(width, height);
+            if (this.material) {
+                this.material.uniforms.resolution.value.set(width, height);
+            }
+            
+            this.camera.updateProjectionMatrix();
+        }, 150);
     }
 
     animate() {
-        requestAnimationFrame(this.animate.bind(this));
-        if (this.material) {
-            this.material.uniforms.time.value += 0.002;
-        }
-        this.renderer.render(this.scene, this.camera);
+        if (!this._running) this._running = true;
+        const loop = () => {
+            if (!this._running) return;
+            requestAnimationFrame(loop);
+            if (this.material) {
+                // Slow down animation slightly for better performance
+                this.material.uniforms.time.value += 0.0015;
+            }
+            this.renderer.render(this.scene, this.camera);
+        };
+        loop();
+    }
+
+    pause() {
+        this._running = false;
+    }
+
+    resume() {
+        if (!this._running) this.animate();
     }
 }
 

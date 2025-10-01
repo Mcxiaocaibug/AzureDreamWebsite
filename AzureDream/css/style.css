@@ -24,6 +24,13 @@
     --text-color: #FFFFFF;
     --glass-background: rgba(255, 255, 255, 0.1);
     --glass-border: rgba(255, 255, 255, 0.2);
+    /* Apple-style rounded corners */
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    --radius-2xl: 28px;
+    --radius-full: 9999px;
 }
 
 * {
@@ -33,10 +40,18 @@
     font-family: 'Power Grotesk', 'MiSans', sans-serif;
 }
 
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
 body {
     background-color: var(--background-color);
     color: var(--text-color);
     overflow-x: hidden;
+    /* Improve scrolling performance */
+    -webkit-overflow-scrolling: touch;
 }
 
 .blur-overlay {
@@ -50,6 +65,115 @@ body {
     z-index: -1;
 }
 
+/* Liquid glass utility inspired by Example/liquid-glass-effect */
+:where(.liquid-glass) {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: var(--liquid-glass-radius, var(--radius-xl));
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 
+                0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    will-change: transform;
+}
+
+:where(.liquid-glass) > * {
+    position: relative;
+    z-index: 2;
+}
+
+.liquid-glass__effect,
+.liquid-glass__tint,
+.liquid-glass__shine {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.liquid-glass__effect {
+    filter: url(#glass-distortion);
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+}
+
+.liquid-glass__tint {
+    background: rgba(255, 255, 255, 0.18);
+    mix-blend-mode: overlay;
+}
+
+.liquid-glass__shine {
+    box-shadow: inset 2px 2px 3px 0 rgba(255, 255, 255, 0.6),
+        inset -2px -2px 3px 0 rgba(255, 255, 255, 0.4);
+    opacity: 0.8;
+}
+
+@keyframes glassTintDrift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+:where(.liquid-glass):hover {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 
+                0 6px 16px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px) scale(1.01);
+}
+
+.liquid-glass--static,
+.liquid-glass--static:hover {
+    transform: none !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35), 
+                0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure navigation container stays in place */
+nav.glass-nav.liquid-glass--static,
+nav.glass-nav.liquid-glass--static:hover {
+    transform: translateX(-50%) !important;
+}
+
+.liquid-glass--hero {
+    --liquid-glass-radius: var(--radius-2xl);
+    background: rgba(40, 40, 40, 0.6);
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+}
+
+.liquid-glass--panel {
+    --liquid-glass-radius: var(--radius-xl);
+}
+
+.liquid-glass--button {
+    --liquid-glass-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.2rem 2.6rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 
+                0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.liquid-glass--button:hover {
+    padding: 1.35rem 2.9rem;
+    transform: translateY(-2px) scale(1.02);
+}
+
+.liquid-glass--button:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
 .hero {
     min-height: 100vh;
     display: flex;
@@ -57,19 +181,25 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 0 1rem;
+    padding: clamp(6rem, 10vh, 8rem) clamp(1.5rem, 3vw, 2rem) clamp(3rem, 5vh, 5rem);
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(280px, 1fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .hero-content {
-    text-align: center;
+    text-align: left;
     z-index: 1;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: clamp(1.75rem, 3vh, 2.75rem) clamp(2rem, 3vw, 2.75rem);
     mix-blend-mode: screen;
-    margin-top: 2rem;
+    margin-top: 0;
+    max-width: 520px;
 }
 
 h1, h2, p {
@@ -84,19 +214,21 @@ h1, h2, p {
 }
 
 h1 {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1rem);
+    line-height: 1.15;
 }
 
 h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    margin-bottom: clamp(1.25rem, 2.5vh, 2rem);
     opacity: 0.9;
+    line-height: 1.2;
 }
 
 p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: clamp(1rem, 1.75vw, 1.2rem);
+    margin-bottom: clamp(1.5rem, 2.5vh, 2rem);
     line-height: 1.6;
 }
 
@@ -108,61 +240,120 @@ p {
 
 .cta-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.hero-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2.5vh, 25px);
+    align-items: flex-end;
+    z-index: 1;
+}
+
+.hero-menu,
+.hero-dock,
+.hero-button {
+    width: min(clamp(300px, 40vw, 360px), 100%);
+}
+
+.hero-menu {
+    cursor: default;
+}
+
+.hero-menu .liquidGlass-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-end;
+}
+
+.hero-menu .liquidGlass-text > div {
+    text-align: right;
+    color: #FFFFFF;
+    font-size: 1.15rem;
+}
+
+.hero-dock .liquidGlass-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
-.cta-primary, .cta-secondary {
-    padding: 1rem 2rem;
-    border-radius: 30px;
+.hero-dock img {
+    border-radius: var(--radius-lg, 20px);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+    will-change: transform;
+}
+
+.hero-dock img:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+.hero-button {
+    align-self: flex-end;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    position: relative;
-    font-size: 1.2rem;
+    color: inherit;
+}
+
+.hero-button .liquidGlass-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: flex-start;
+}
+
+.hero-button-primary {
+    font-size: 2rem;
+    font-weight: 700;
     letter-spacing: 1px;
+}
+
+.hero-button-sub {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.cta-primary, .cta-secondary {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    background: rgba(45, 45, 45, 0.5);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid transparent; /* Border is created by the pseudo-element */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
     color: #FFFFFF;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    overflow: hidden;
+    border: none;
+    background: transparent;
+    will-change: transform;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.cta-primary::before, .cta-secondary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 30px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
-    -webkit-mask:
-         linear-gradient(#fff 0 0) content-box,
-         linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
+.cta-secondary,
+#copy-btn {
+    cursor: pointer;
 }
 
-.cta-primary:hover, .cta-secondary:hover {
-    background: rgba(55, 55, 55, 0.6);
-    box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.1),
-        0 15px 25px rgba(0, 0, 0, 0.35);
-    transform: translateY(-2px);
+.copy-btn-wrapper {
+    cursor: pointer;
 }
 
-.cta-primary:active, .cta-secondary:active {
-    transform: translateY(1px);
-    box-shadow:
-        inset 0 1px 1px rgba(255, 255, 255, 0.05),
-        0 5px 15px rgba(0, 0, 0, 0.2);
+.copy-btn-wrapper button {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    font: inherit;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0;
+}
+
+.copy-btn-wrapper button:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.6);
+    outline-offset: 4px;
 }
 
 #shader-container {
@@ -195,7 +386,213 @@ p {
     }
 }
 
+/* Large desktop - better two-column layout */
+@media (min-width: 1200px) and (min-height: 800px) {
+    .hero {
+        padding: 8rem 2rem 5rem;
+    }
+    
+    .hero-inner {
+        max-width: 1400px;
+        gap: 4rem;
+    }
+}
+
+/* Medium screens - adjust spacing */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .hero-inner {
+        gap: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 3.5rem;
+    }
+    
+    h2 {
+        font-size: 2.25rem;
+    }
+}
+
+/* Tablet and below - single column */
+@media (max-width: 1023px) {
+    .hero {
+        padding: 0 1.5rem;
+        min-height: 100vh;
+        min-height: 100svh; /* Better mobile viewport support */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-inner {
+        grid-template-columns: 1fr;
+        gap: clamp(2rem, 4vh, 3rem);
+        align-items: stretch;
+        justify-items: center;
+        width: 100%;
+        padding: clamp(5rem, 8vh, 6rem) 0 clamp(2rem, 4vh, 3rem);
+    }
+
+    .hero-showcase {
+        align-items: center;
+    }
+
+    .hero-menu .liquidGlass-text {
+        align-items: center;
+    }
+
+    .hero-menu .liquidGlass-text > div {
+        text-align: center;
+    }
+
+    .hero-button {
+        align-self: center;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+    
+    .hero-content {
+        text-align: center;
+        max-width: 100%;
+        max-width: min(500px, 90vw);
+        align-self: center;
+    }
+    
+    /* Add spacing around hero content */
+    .hero-content::before,
+    .hero-content::after {
+        content: '';
+        display: block;
+        height: clamp(2rem, 5vh, 4rem);
+    }
+}
+
+/* Short screens - compress vertical spacing */
+@media (max-height: 800px) {
+    .hero {
+        padding: 5.5rem 1.5rem 2.5rem;
+    }
+    
+    .hero-inner {
+        gap: 2rem;
+    }
+    
+    .hero-showcase {
+        gap: 15px;
+    }
+    
+    h1 {
+        font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+        margin-bottom: 0.75rem;
+    }
+    
+    h2 {
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        margin-bottom: 1.25rem;
+    }
+    
+    p {
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-content {
+        padding: 1.75rem 2rem;
+    }
+}
+
+/* Tablet portrait - optimize spacing */
+@media (max-width: 1023px) and (min-height: 800px) {
+    .hero-inner {
+        padding: clamp(6rem, 10vh, 8rem) 0 clamp(3rem, 5vh, 5rem);
+    }
+    
+    .hero-content::before,
+    .hero-content::after {
+        height: clamp(3rem, 8vh, 6rem);
+    }
+}
+
+/* Very short screens - further compression */
+@media (max-height: 700px) {
+    .hero {
+        min-height: auto;
+        padding: 0 1.5rem;
+    }
+    
+    .hero-inner {
+        gap: 1.5rem;
+        min-height: auto;
+        padding: 5rem 0 2rem;
+    }
+    
+    .hero-showcase {
+        gap: 12px;
+    }
+    
+    h1 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin-bottom: 0.5rem;
+    }
+    
+    h2 {
+        font-size: clamp(1.35rem, 2.75vw, 2rem);
+        margin-bottom: 1rem;
+    }
+    
+    p {
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .cta-buttons {
+        gap: 1rem;
+    }
+    
+    .hero-content {
+        padding: 1.5rem 1.75rem;
+    }
+    
+    /* Remove extra spacing on very short screens */
+    .hero-content::before,
+    .hero-content::after {
+        height: 1rem;
+    }
+    
+    .hero-menu .liquidGlass-text > div {
+        font-size: 1rem;
+    }
+}
+
+/* Contain heavy sections for perf */
+.about-container,
+.join-container,
+.players-container,
+.staff-container,
+.features,
+.info-grid,
+.join-steps,
+.fame-grid,
+.staff-grid {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 500px;
+}
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* Advanced Liquid Glass Card Style with Refractive Edge */
+
 .feature-card,
 .info-item,
 .step-card,
@@ -203,53 +600,257 @@ p {
 .staff-card,
 .player-card,
 .fame-card {
-    background: rgba(35, 35, 35, 0.5);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-radius: 24px;
-    border: 1px solid transparent; /* Border is created by the pseudo-element */
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    --liquid-glass-radius: var(--radius-xl, 24px);
+    padding: clamp(1.75rem, 3vw, 2.5rem);
     transform-style: preserve-3d;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    border-radius: var(--radius-xl, 24px);
+}
+
+/* Feature cards get extra large rounded corners */
+.feature-card {
+    --liquid-glass-radius: var(--radius-2xl, 28px);
+    border-radius: var(--radius-2xl, 28px);
+}
+
+/* Fame cards (VIP treatment) */
+.fame-card {
+    --liquid-glass-radius: var(--radius-2xl, 28px);
+    border-radius: var(--radius-2xl, 28px);
+}
+
+/* Liquid Glass (Example) classes */
+.liquidGlass-wrapper {
     position: relative;
+    display: flex;
+    align-items: stretch;
+    font-weight: 600;
     overflow: hidden;
-    padding: 2rem;
+    cursor: pointer;
+    color: #FFFFFF;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 
+                0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+    will-change: transform;
+    isolation: isolate;
 }
 
-.feature-card::before,
-.info-item::before,
-.step-card::before,
-.requirement-item::before,
-.staff-card::before,
-.player-card::before,
-.fame-card::before {
-    content: '';
+/* Prevent navigation from inheriting liquidGlass hover effects */
+.glass-nav .liquidGlass-wrapper,
+.glass-nav .liquidGlass-wrapper:hover {
+    will-change: auto;
+}
+
+.liquidGlass-effect {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 24px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-    -webkit-mask:
-         linear-gradient(#fff 0 0) content-box,
-         linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
+    z-index: 0;
+    inset: 0;
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    filter: url(#glass-distortion);
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: inherit;
 }
 
-.feature-card:hover,
-.info-item:hover,
-.step-card:hover,
-.requirement-item:hover,
-.staff-card:hover,
-.player-card:hover,
-.fame-card:hover {
-    background: rgba(45, 45, 45, 0.6);
-    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.4);
-    transform: scale(1.02) translateY(-5px);
+.liquidGlass-tint {
+    z-index: 1;
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.18);
+    mix-blend-mode: overlay;
+    border-radius: inherit;
+}
+
+.liquidGlass-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    box-shadow: inset 2px 2px 3px 0 rgba(255, 255, 255, 0.6),
+      inset -2px -2px 3px 0 rgba(255, 255, 255, 0.4);
+    opacity: 0.8;
+    border-radius: inherit;
+}
+
+.liquidGlass-text {
+    z-index: 3;
+    position: relative;
+}
+
+/* Liquid glass cards */
+.feature-card.liquidGlass-wrapper,
+.info-item.liquidGlass-wrapper,
+.step-card.liquidGlass-wrapper,
+.requirement-item.liquidGlass-wrapper,
+.staff-card.liquidGlass-wrapper,
+.player-card.liquidGlass-wrapper,
+.fame-card.liquidGlass-wrapper {
+    flex-direction: column;
+    justify-content: space-between;
+    padding: clamp(1.75rem, 3vw, 2.5rem);
+    min-height: 100%;
+    cursor: default;
+}
+
+/* Ensure all liquid glass layers inherit the card's border radius */
+.liquidGlass-wrapper .liquidGlass-effect,
+.liquidGlass-wrapper .liquidGlass-tint,
+.liquidGlass-wrapper .liquidGlass-shine {
+    border-radius: inherit;
+}
+
+.feature-card .liquidGlass-text,
+.info-item .liquidGlass-text,
+.step-card .liquidGlass-text,
+.requirement-item .liquidGlass-text,
+.staff-card .liquidGlass-text,
+.player-card .liquidGlass-text,
+.fame-card .liquidGlass-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    width: 100%;
+    font-weight: 400;
+}
+
+.feature-card .liquidGlass-text,
+.info-item .liquidGlass-text,
+.step-card .liquidGlass-text,
+.requirement-item .liquidGlass-text {
+    text-align: center;
+    align-items: center;
+}
+
+.requirement-item .liquidGlass-text {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.staff-card .liquidGlass-text,
+.player-card .liquidGlass-text,
+.fame-card .liquidGlass-text {
+    align-items: center;
+    text-align: center;
+}
+
+.feature-card .liquidGlass-text img,
+.staff-card .liquidGlass-text img,
+.player-card .liquidGlass-text img,
+.fame-card .liquidGlass-text img {
+    align-self: center;
+    border-radius: 16px;
+}
+
+.feature-card .liquidGlass-text h3,
+.info-item .liquidGlass-text h4,
+.step-card .liquidGlass-text h3,
+.requirement-item .liquidGlass-text h3,
+.staff-card .liquidGlass-text h3,
+.player-card .liquidGlass-text h3,
+.fame-card .liquidGlass-text h3 {
+    margin: 0;
+}
+
+.step-card .liquidGlass-text button,
+.step-card .liquidGlass-text a {
+    align-self: center;
+}
+
+/* Example menu */
+.menu,
+.menu > div {
+  padding: 0.4rem;
+  border-radius: var(--radius-lg);
+}
+
+.menu:hover {
+  padding: 0.6rem;
+  border-radius: var(--radius-lg);
+}
+
+.menu > div > div {
+  font-size: 20px;
+  color: white;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu > div > div:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: inset -2px -2px 2px rgba(0, 0, 0, 0.1),
+              0 2px 8px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  transform: scale(1.02);
+}
+
+/* Example dock */
+.dock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--radius-2xl);
+  padding: 0.6rem;
+}
+
+.dock,
+.dock > div {
+  border-radius: var(--radius-2xl);
+}
+
+.dock:hover {
+  padding: 0.8rem;
+  border-radius: calc(var(--radius-2xl) + 4px);
+}
+
+.dock:hover > div {
+  border-radius: calc(var(--radius-2xl) + 4px);
+}
+
+.dock img {
+  width: 75px;
+  padding: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  border-radius: var(--radius-lg);
+}
+
+.dock img:hover {
+  transform: translateY(-8px) scale(1.15);
+  transform-origin: center bottom;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+}
+
+/* Example button */
+.button {
+  padding: 1.5rem 2.5rem;
+  border-radius: var(--radius-full);
+}
+
+.button,
+.button > div {
+  border-radius: var(--radius-full);
+}
+
+.button:hover {
+  padding: 1.7rem 2.7rem;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.button:hover > div {
+  border-radius: var(--radius-full);
+}
+
+.button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.button svg {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+.button:hover svg {
+  transform: scale(0.97);
 }
 
 .card-shine {
@@ -264,13 +865,13 @@ p {
 }
 
 /* 卡片内容3D效果 */
-.feature-card > *,
-.info-item > *,
-.step-card > *,
-.requirement-item > *,
-.staff-card > *,
-.player-card > *,
-.fame-card > * {
+.feature-card .liquidGlass-text,
+.info-item .liquidGlass-text,
+.step-card .liquidGlass-text,
+.requirement-item .liquidGlass-text,
+.staff-card .liquidGlass-text,
+.player-card .liquidGlass-text,
+.fame-card .liquidGlass-text {
     transform: translateZ(20px);
     position: relative;
     z-index: 2;
@@ -392,27 +993,23 @@ a[href="https://www.netlify.com"]:link {
     opacity: 0.9;
 }
 
+/* Mobile specific - up to 768px */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
+    .hero-dock img {
+        width: clamp(55px, 15vw, 65px);
     }
 
-    h2 {
-        font-size: 1.8rem;
+    .hero-button-primary {
+        font-size: clamp(1.4rem, 4vw, 1.6rem);
     }
 
-    p {
-        font-size: 1rem;
+    .liquidGlass-wrapper.button {
+        padding: 1rem 2.1rem;
     }
 
-    .hero-content {
-        padding: 1.5rem;
-        margin-top: 3rem;
-    }
-
-    .cta-primary, .cta-secondary {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+    .liquidGlass-wrapper.button:hover {
+        padding: 1rem 2.1rem;
+        border-radius: var(--radius-full);
     }
 
     .footer {
@@ -430,5 +1027,11 @@ a[href="https://www.netlify.com"]:link {
 
     .netlify-logo {
         height: 10px;
+    }
+    
+    /* Optimize mobile performance */
+    .liquidGlass-effect {
+        backdrop-filter: blur(6px) saturate(150%);
+        -webkit-backdrop-filter: blur(6px) saturate(150%);
     }
 }

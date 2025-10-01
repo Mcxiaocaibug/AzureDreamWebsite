@@ -1,16 +1,17 @@
 .about-container {
     min-height: 100vh;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 120px 2rem 2rem;
+    padding: 120px clamp(1.5rem, 4vw, 3rem) 3rem;
     position: relative;
     z-index: 1;
 }
 
 .about-hero {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
     mix-blend-mode: difference;
+    padding: clamp(2rem, 4vw, 3rem);
 }
 
 .about-hero h1 {
@@ -28,17 +29,34 @@
 
 .features {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+/* Ensure feature cards have proper rounded corners */
+.feature-card {
+    border-radius: var(--radius-2xl, 28px);
+    --liquid-glass-radius: var(--radius-2xl, 28px);
+}
+
+.feature-card.liquidGlass-wrapper,
+.feature-card.liquidGlass-wrapper > * {
+    border-radius: var(--radius-2xl, 28px);
 }
 
 .feature-icon {
     width: 80px;
     height: 80px;
-    border-radius: 16px;
+    border-radius: var(--radius-md, 16px);
     margin-bottom: 1.5rem;
     object-fit: cover;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-icon:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
 }
 
 .feature-card h3 {
@@ -67,8 +85,19 @@
 
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Ensure info cards have proper rounded corners */
+.info-item {
+    border-radius: var(--radius-xl, 24px);
+    --liquid-glass-radius: var(--radius-xl, 24px);
+}
+
+.info-item.liquidGlass-wrapper,
+.info-item.liquidGlass-wrapper > * {
+    border-radius: var(--radius-xl, 24px);
 }
 
 
@@ -95,24 +124,81 @@
     transform: translateY(0);
 }
 
-@media (max-width: 768px) {
+/* Large desktop - 1440px+ */
+@media (min-width: 1440px) {
     .about-container {
-        padding-top: 70px;
-        padding-bottom: 60px;
+        max-width: 1600px;
+    }
+    
+    .features {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+    }
+}
+
+/* Desktop - 1024px to 1439px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .features {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Tablet - 768px to 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .about-container {
+        padding: 100px 2rem 2.5rem;
+    }
+    
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem;
+    }
+    
+    .feature-card, .info-item {
+        padding: 2rem;
+    }
+}
+
+/* Mobile - up to 767px */
+@media (max-width: 767px) {
+    .about-container {
+        padding: 90px 1.25rem 2rem;
+    }
+    
+    .about-hero {
+        padding: 1.75rem;
+        margin-bottom: 2.5rem;
     }
 
     .about-hero h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
+        margin-bottom: 0.75rem;
     }
 
     .subtitle {
-        font-size: 1.2rem;
+        font-size: clamp(1rem, 3.5vw, 1.15rem);
     }
 
     .features {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem;
     }
 
     .info-grid {
@@ -121,11 +207,43 @@
     }
     
     .feature-card, .info-item {
-        padding: 1.5rem;
+        padding: 1.75rem 1.5rem;
     }
     
     .server-info h2 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+        font-size: clamp(1.75rem, 5vw, 2rem);
+        margin-bottom: 1.75rem;
+    }
+    
+    .feature-icon {
+        width: clamp(64px, 18vw, 75px);
+        height: clamp(64px, 18vw, 75px);
+    }
+    
+    .feature-card h3 {
+        font-size: clamp(1.25rem, 4vw, 1.5rem);
+    }
+    
+    .info-item h4 {
+        font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+    }
+}
+
+/* Extra small mobile - up to 390px */
+@media (max-width: 390px) {
+    .about-container {
+        padding: 85px 1rem 1.5rem;
+    }
+    
+    .about-hero {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .features {
+        gap: 1.25rem;
+    }
+    
+    .feature-card, .info-item {
+        padding: 1.5rem 1.25rem;
     }
 }

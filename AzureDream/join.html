@@ -4,19 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>加入我们 - AzureDream</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" href="fonts/PowerGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/MiSans-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/join.css">
 </head>
 <body>
+    <!-- SVG Filter for Liquid Glass Effect -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+            <feTurbulence type="fractalNoise" baseFrequency="0.001 0.005" numOctaves="1" seed="17" result="turbulence" />
+            <feComponentTransfer in="turbulence" result="mapped">
+                <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
+                <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+                <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+            </feComponentTransfer>
+            <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+            <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight">
+                <fePointLight x="-200" y="-200" z="300" />
+            </feSpecularLighting>
+            <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage" />
+            <feDisplacementMap in="SourceGraphic" in2="softMap" scale="200" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+    
     <div class="blur-overlay"></div>
-    <nav class="glass-nav">
+    <nav class="glass-nav liquid-glass liquid-glass--static">
         <div class="nav-content">
             <div class="logo">
-                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img">
+                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img" width="40" height="40" decoding="async" fetchpriority="high">
                 AzureDream
             </div>
-            <div class="nav-links">
+            <div class="nav-links liquidGlass-wrapper dock">
                 <a href="index.html">主页</a>
                 <a href="about.html">服务器简介</a>
                 <a href="join.html" class="active">加入方式</a>
@@ -32,25 +53,27 @@
     </nav>
 
     <main class="join-container">
-        <section class="join-hero animate-on-scroll">
+        <section class="join-hero animate-on-scroll liquid-glass liquid-glass--panel">
             <h1>加入 AzureDream</h1>
             <p class="subtitle">开启你的AI驱动Minecraft之旅</p>
         </section>
 
         <section class="join-steps animate-on-scroll">
-            <div class="step-card">
+            <div class="step-card liquidGlass-wrapper">
                 <h3>第一步：加入QQ群</h3>
                 <p>群号：974782827</p>
-                <a href="https://qm.qq.com/q/yTFgbREpDW" class="cta-primary" target="_blank" rel="noopener noreferrer">点击加群</a>
+                <a href="https://qm.qq.com/q/yTFgbREpDW" class="cta-primary liquidGlass-wrapper button" target="_blank" rel="noopener noreferrer">点击加群</a>
             </div>
-            <div class="step-card">
+            <div class="step-card liquidGlass-wrapper">
                 <h3>第二步：阅读群规</h3>
                 <p>在加入前，请仔细阅读群内的规则公告，以获得最佳游戏体验。</p>
             </div>
-            <div class="step-card">
+            <div class="step-card liquidGlass-wrapper">
                 <h3>第三步：连接服务器</h3>
                 <p>服务器地址：<strong id="server-address">miku.click:10669</strong></p>
-                <button id="copy-btn" class="cta-secondary">复制地址</button>
+                <div class="liquidGlass-wrapper button copy-btn-wrapper">
+                    <button id="copy-btn" class="cta-secondary">复制地址</button>
+                </div>
             </div>
         </section>
 
@@ -61,7 +84,7 @@
     </footer>
 
     <div id="shader-container"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js" defer></script>
     <script>
         // 检查 Three.js 是否正确加载
         window.addEventListener('load', () => {
@@ -72,8 +95,8 @@
             console.log('Three.js 版本:', THREE.REVISION);
         });
     </script>
-    <script src="js/shader.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/card-effects.js"></script>
+    <script src="js/shader.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/card-effects.js" defer></script>
 </body>
 </html>

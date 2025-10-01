@@ -1,10 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 选择所有需要添加3D效果的卡片
+    // Skip animations if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    
+    // Select all cards that need 3D effects
     const cards = document.querySelectorAll('.feature-card, .info-item, .step-card, .requirement-item, .staff-card, .player-card, .fame-card');
 
     cards.forEach(card => {
-        // 鼠标移动效果
-        card.addEventListener('mousemove', (e) => {
+        // Mouse move effect (throttled with rAF)
+        let ticking = false;
+        let lx = 0, ly = 0;
+        
+        const handle = (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -12,56 +18,74 @@ document.addEventListener('DOMContentLoaded', () => {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = ((y - centerY) / centerY) * 25; // 增加到25度
-            const rotateY = ((centerX - x) / centerX) * 25; // 增加到25度
+            // Reduced rotation intensity for subtler effect
+            const rotateX = ((y - centerY) / centerY) * 10;
+            const rotateY = ((centerX - x) / centerX) * 10;
 
-            // 添加3D变换效果
+            // Apply 3D transform with reduced intensity
             card.style.transform = `
-                perspective(1000px)
+                perspective(1200px)
                 rotateX(${rotateX}deg)
                 rotateY(${rotateY}deg)
-                translateZ(30px)
-                scale(1.05)
+                translateZ(20px)
+                scale(1.03)
             `;
 
-            // 添加光影效果
-            const shine = card.querySelector('.card-shine') || document.createElement('div');
-            if (!card.querySelector('.card-shine')) {
+            // Add shine effect
+            let shine = card.querySelector('.card-shine');
+            if (!shine) {
+                shine = document.createElement('div');
                 shine.classList.add('card-shine');
                 card.appendChild(shine);
             }
 
-            const moveX = ((x - centerX) / centerX) * 200; // 增加光影范围
-            const moveY = ((y - centerY) / centerY) * 200;
-            shine.style.background = `radial-gradient(circle at ${moveX}% ${moveY}%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 80%)`;
-        });
+            const moveX = 50 + ((x - centerX) / centerX) * 50;
+            const moveY = 50 + ((y - centerY) / centerY) * 50;
+            shine.style.background = `radial-gradient(circle at ${moveX}% ${moveY}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%)`;
+        };
 
-        // 鼠标离开效果
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'none';
+        const onMove = (e) => {
+            lx = e.clientX; 
+            ly = e.clientY;
+            if (!ticking) {
+                requestAnimationFrame(() => { 
+                    handle({ clientX: lx, clientY: ly }); 
+                    ticking = false; 
+                });
+                ticking = true;
+            }
+        };
+        
+        card.addEventListener('pointermove', onMove, { passive: true });
+
+        // Reset on leave
+        const resetCard = () => {
+            card.style.transform = '';
             const shine = card.querySelector('.card-shine');
             if (shine) {
                 shine.remove();
             }
-        });
+        };
+        
+        card.addEventListener('pointerleave', resetCard);
+        card.addEventListener('pointercancel', resetCard);
 
-        // 点击效果
-        card.addEventListener('mousedown', () => {
+        // Press effect
+        card.addEventListener('pointerdown', () => {
             card.style.transform = `
-                perspective(1000px)
-                scale(0.95)
-                translateZ(-10px)
-                rotateX(2deg)
+                perspective(1200px)
+                scale(0.97)
+                translateZ(-5px)
             `;
-        });
+        }, { passive: true });
 
-        // 释放点击效果
-        card.addEventListener('mouseup', () => {
+        // Release effect
+        card.addEventListener('pointerup', () => {
             card.style.transform = `
-                perspective(1000px)
-                scale(1.05)
-                translateZ(30px)
+                perspective(1200px)
+                scale(1.03)
+                translateZ(20px)
             `;
-        });
+        }, { passive: true });
     });
 }); 

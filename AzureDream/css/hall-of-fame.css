@@ -1,15 +1,16 @@
 .players-container {
     min-height: 100vh;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 120px 2rem 2rem;
+    padding: 120px clamp(1.5rem, 4vw, 3rem) 3rem;
     position: relative;
     z-index: 1;
 }
 
 .players-hero {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+    padding: clamp(2rem, 4vw, 3rem);
 }
 
 .players-hero h1 {
@@ -33,30 +34,45 @@
 
 .fame-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
     justify-content: center; /* 居中显示 */
 }
 
 .fame-card {
     text-align: center;
+    border-radius: var(--radius-2xl, 28px);
+    --liquid-glass-radius: var(--radius-2xl, 28px);
+}
+
+.fame-card.liquidGlass-wrapper,
+.fame-card.liquidGlass-wrapper > * {
+    border-radius: var(--radius-2xl, 28px);
 }
 
 .fame-avatar {
     width: 150px;
     height: 150px;
     margin: 0 auto 1.5rem;
-    border-radius: 16px; /* 圆角正方形 */
+    border-radius: var(--radius-lg, 20px);
     overflow: hidden;
-    border: 4px solid rgba(255, 255, 255, 0.6);
+    border: 4px solid rgba(255, 215, 0, 0.7);
     position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.3);
+}
+
+.fame-avatar:hover {
+    transform: scale(1.05) rotate(2deg);
+    border-color: rgba(255, 215, 0, 1);
+    box-shadow: 0 12px 32px rgba(255, 215, 0, 0.5);
 }
 
 .fame-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 16px; /* 确保图片本身也是圆角 */
+    border-radius: var(--radius-lg, 20px);
 }
 
 .fame-crown {
@@ -75,14 +91,58 @@
     color: #FFFFFF;
 }
 
-@media (max-width: 768px) {
+/* Large desktop - 1440px+ */
+@media (min-width: 1440px) {
     .players-container {
-        padding-top: 70px;
-        padding-bottom: 60px;
+        max-width: 1600px;
+    }
+    
+    .fame-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+        gap: 3rem;
+    }
+}
+
+/* Desktop - 1024px to 1439px */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .fame-grid {
+        gap: 2.5rem;
+    }
+}
+
+/* Tablet - 768px to 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .players-container {
+        padding: 100px 2rem 2.5rem;
+    }
+    
+    .fame-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    .fame-card {
+        padding: 2rem;
+    }
+}
+
+/* Mobile - up to 767px */
+@media (max-width: 767px) {
+    .players-container {
+        padding: 90px 1.25rem 2rem;
+    }
+    
+    .players-hero {
+        padding: 1.75rem;
+        margin-bottom: 2.5rem;
     }
 
     .players-hero h1 {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 6vw, 2.25rem);
+    }
+    
+    .subtitle {
+        font-size: clamp(1rem, 3.5vw, 1.15rem);
     }
 
     .fame-grid {
@@ -91,11 +151,51 @@
     }
     
     .fame-card {
-        padding: 1.5rem;
+        padding: 1.75rem 1.5rem;
+    }
+    
+    .fame-card h3 {
+        font-size: clamp(1.5rem, 4.5vw, 1.8rem);
     }
     
     .fame-avatar {
-        width: 120px;
-        height: 120px;
+        width: 135px;
+        height: 135px;
+    }
+    
+    .fame-crown {
+        width: 38px;
+        height: 38px;
+        top: -19px;
+    }
+}
+
+/* Extra small mobile - up to 390px */
+@media (max-width: 390px) {
+    .players-container {
+        padding: 85px 1rem 1.5rem;
+    }
+    
+    .players-hero {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .fame-grid {
+        gap: 1.25rem;
+    }
+    
+    .fame-card {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .fame-avatar {
+        width: 115px;
+        height: 115px;
+    }
+    
+    .fame-crown {
+        width: 32px;
+        height: 32px;
+        top: -16px;
     }
 }

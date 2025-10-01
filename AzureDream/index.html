@@ -4,18 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>AzureDream - AI驱动的未来级Minecraft服务器</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" href="fonts/PowerGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/MiSans-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
+    <!-- SVG Filter for Liquid Glass Effect -->
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+            <feTurbulence type="fractalNoise" baseFrequency="0.001 0.005" numOctaves="1" seed="17" result="turbulence" />
+            <feComponentTransfer in="turbulence" result="mapped">
+                <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
+                <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+                <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+            </feComponentTransfer>
+            <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+            <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight">
+                <fePointLight x="-200" y="-200" z="300" />
+            </feSpecularLighting>
+            <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage" />
+            <feDisplacementMap in="SourceGraphic" in2="softMap" scale="200" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+    
     <div class="blur-overlay"></div>
-    <nav class="glass-nav">
+    <nav class="glass-nav liquid-glass liquid-glass--static">
         <div class="nav-content">
             <div class="logo">
-                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img">
+                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img" width="40" height="40" decoding="async" fetchpriority="high">
                 AzureDream
             </div>
-            <div class="nav-links">
+            <div class="nav-links liquidGlass-wrapper dock">
                 <a href="index.html" class="active">主页</a>
                 <a href="about.html">服务器简介</a>
                 <a href="join.html">加入方式</a>
@@ -32,13 +53,33 @@
 
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <h1>由AI驱动的<span class="hollow-text">Minecraft</span>服务器</h1>
-                <h2>来自蔚蓝未来</h2>
-                <p>体验下一代游戏服务器，感受AI带来的无限可能</p>
-                <div class="cta-buttons">
-                    <a href="join.html" class="cta-primary">立即加入</a>
-                    <a href="about.html" class="cta-secondary">了解更多</a>
+            <div class="hero-inner">
+                <div class="hero-content liquid-glass liquid-glass--hero">
+                    <h1>由AI驱动的<span class="hollow-text">Minecraft</span>服务器</h1>
+                    <h2>来自蔚蓝未来</h2>
+                    <p>体验下一代游戏服务器，感受AI带来的无限可能</p>
+                    <div class="cta-buttons">
+                        <a href="join.html" class="cta-primary liquidGlass-wrapper button">立即加入</a>
+                        <a href="about.html" class="cta-secondary liquidGlass-wrapper button">了解更多</a>
+                    </div>
+                </div>
+                <div class="hero-showcase">
+                    <div class="liquidGlass-wrapper menu hero-menu">
+                        <div>AI 智能管理</div>
+                        <div>Leaves 高性能内核</div>
+                        <div>沉浸式社交体验</div>
+                        <div>创造与自动化共存</div>
+                    </div>
+                    <div class="liquidGlass-wrapper dock hero-dock">
+                        <img src="images/logo.png" alt="AzureDream" width="72" height="72" loading="lazy" decoding="async">
+                        <img src="images/staff/rmanagarmr.png" alt="RManagarmr" width="72" height="72" loading="lazy" decoding="async">
+                        <img src="images/staff/mcxiaocai666.png" alt="Mcxiaocai666" width="72" height="72" loading="lazy" decoding="async">
+                        <img src="images/staff/tanzeus.png" alt="Tanzeus" width="72" height="72" loading="lazy" decoding="async">
+                    </div>
+                    <a href="join.html" class="hero-button liquidGlass-wrapper button">
+                        <span class="hero-button-primary">AzureDream</span>
+                        <span class="hero-button-sub">立即启航，探索蔚蓝未来</span>
+                    </a>
                 </div>
             </div>
             <div id="shader-container"></div>
@@ -55,7 +96,7 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js" defer></script>
     <script>
         // 检查 Three.js 是否正确加载
         window.addEventListener('load', () => {
@@ -66,7 +107,7 @@
             console.log('Three.js 版本:', THREE.REVISION);
         });
     </script>
-    <script src="js/shader.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/shader.js" defer></script>
+    <script src="js/main.js" defer></script>
 </body>
 </html>
