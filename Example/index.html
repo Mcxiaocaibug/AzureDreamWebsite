@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>macOS Liquid Glass Effect</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- SVG Filter HERE -->
+    <svg style="display: none">
+      <filter
+        id="glass-distortion"
+        x="0%"
+        y="0%"
+        width="100%"
+        height="100%"
+        filterUnits="objectBoundingBox"
+      >
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.001 0.005"
+          numOctaves="1"
+          seed="17"
+          result="turbulence"
+        />
+        <!-- Liked Seeds: 5, 14, 17 -->
+
+        <feComponentTransfer in="turbulence" result="mapped">
+          <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
+          <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
+          <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
+        </feComponentTransfer>
+
+        <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+
+        <feSpecularLighting
+          in="softMap"
+          surfaceScale="5"
+          specularConstant="1"
+          specularExponent="100"
+          lighting-color="white"
+          result="specLight"
+        >
+          <fePointLight x="-200" y="-200" z="300" />
+        </feSpecularLighting>
+
+        <feComposite
+          in="specLight"
+          operator="arithmetic"
+          k1="0"
+          k2="1"
+          k3="1"
+          k4="0"
+          result="litImage"
+        />
+
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="softMap"
+          scale="200"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+    </svg>
+
+    <!-- Other markup -->
+    <div class="wrapper">
+      <a
+        href="https://github.com/lucasromerodb/liquid-glass-effect-macos"
+        target="_blank"
+      >
+        <div class="liquidGlass-wrapper menu">
+          <div class="liquidGlass-effect"></div>
+          <div class="liquidGlass-tint"></div>
+          <div class="liquidGlass-shine"></div>
+          <div class="liquidGlass-text">
+            <div>New file</div>
+            <div>Open file</div>
+            <div>Settings</div>
+            <div>Repository</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://x.com/lucasromerodb" target="_blank">
+        <div class="liquidGlass-wrapper dock">
+          <div class="liquidGlass-effect"></div>
+          <div class="liquidGlass-tint"></div>
+          <div class="liquidGlass-shine"></div>
+          <div class="liquidGlass-text">
+            <div class="dock">
+              <img
+                src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/finder.png"
+                alt="Finder"
+              />
+              <img
+                src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/map.png"
+                alt="Finder"
+              />
+              <img
+                src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/messages.png"
+                alt="Finder"
+              />
+              <img
+                src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/notes.png"
+                alt="Finder"
+              />
+              <img
+                src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/safari.png"
+                alt="Finder"
+              />
+              <img
+                src="https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/books.png"
+                alt="Finder"
+              />
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://aerolab.co" target="_blank">
+        <div class="liquidGlass-wrapper button">
+          <div class="liquidGlass-effect"></div>
+          <div class="liquidGlass-tint"></div>
+          <div class="liquidGlass-shine"></div>
+          <div class="liquidGlass-text">
+            <svg
+              width="120"
+              viewBox="0 0 186 39"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M30.6275 38.2073V33.6309C30.6275 33.4933 30.5583 33.4245 30.4197 33.4245H28.9304C27.7527 33.4245 27.1293 32.7707 27.1293 31.6352V20.1772C27.1293 13.3987 21.1719 10.4051 14.9374 10.4051C7.90633 10.4051 1.94895 12.4697 1.49868 19.3514C1.49868 19.489 1.56795 19.5578 1.7065 19.5578H7.14434C7.24825 19.5578 7.35216 19.489 7.38679 19.3514C7.69852 16.8395 10.4348 15.2912 14.4179 15.2912C18.7474 15.2912 21.2758 16.7019 21.2758 19.0073V19.7987C21.2758 21.2783 20.1675 22.5858 17.362 22.5858H14.5911C5.44718 22.5858 0.598145 25.3729 0.598145 30.8094C0.598145 36.1084 4.75446 38.8955 12.3397 38.8955C17.8122 38.8955 20.9295 36.7277 22.6959 35.0761C22.7998 34.9729 22.9037 35.0073 22.9383 35.1449C23.6657 37.2094 25.6746 38.4137 28.965 38.4137H30.4197C30.5583 38.4137 30.6275 38.3105 30.6275 38.2073ZM21.2758 27.1965V27.8847C21.2758 31.3944 17.8122 33.975 13.552 33.975C8.42587 33.975 6.48626 32.874 6.48626 30.4654C6.48626 28.332 9.04932 26.9901 14.5911 26.9901H21.068C21.2065 26.9901 21.2758 27.0589 21.2758 27.1965ZM31.3202 24.6503C31.3202 33.1492 37.2776 38.8955 45.6942 38.8955C52.5867 38.8955 57.8168 35.7987 59.2368 30.4998C59.2715 30.3621 59.2022 30.2589 59.0637 30.2589H53.3141C53.2102 30.2589 53.1063 30.2933 53.0716 30.3965C51.9286 32.5987 49.9198 34.0094 45.6942 34.0094C40.568 34.0094 37.6933 30.8439 37.5547 27.1965C37.5547 27.0589 37.624 26.9901 37.7625 26.9901H59.8256C59.9296 26.9901 60.0335 26.9213 60.0335 26.7836C60.6569 17.4589 54.8034 10.4051 45.6942 10.4051C37.3123 10.4051 31.3202 16.0481 31.3202 24.6503ZM37.5547 22.3793C37.4854 19.7987 39.9446 15.2912 45.6942 15.2912C51.4437 15.2912 53.7644 19.1449 53.7297 22.3793C53.7297 22.517 53.6258 22.5858 53.5219 22.5858H37.7625C37.6586 22.5858 37.5547 22.517 37.5547 22.3793ZM75.966 16.0481H79.4296C79.5681 16.0481 79.6374 15.9793 79.6374 15.8417V11.0933C79.6374 10.9557 79.5335 10.8869 79.4296 10.8869H76.9012C74.061 10.8869 71.1516 11.8847 69.1427 14.1901C69.0388 14.3277 68.9003 14.2933 68.8656 14.1213L68.1383 11.0589C68.1036 10.9557 68.0344 10.8869 67.9305 10.8869H63.3931C63.2546 10.8869 63.1853 10.9901 63.1853 11.0933V38.2073C63.1853 38.3449 63.2892 38.4137 63.3931 38.4137H68.5193C68.6578 38.4137 68.7271 38.3105 68.7271 38.2073V24.6159C68.7271 18.732 71.7404 16.0481 75.966 16.0481ZM108.697 24.6503C108.697 15.9449 102.463 10.4051 93.9767 10.4051C85.4909 10.4051 79.2911 15.9449 79.2911 24.6503C79.2911 33.3213 85.5255 38.8955 93.9767 38.8955C102.428 38.8955 108.697 33.3213 108.697 24.6503ZM102.74 24.6503C102.74 30.0869 98.8257 34.0094 93.9767 34.0094C89.1623 34.0094 85.2484 30.0525 85.2484 24.6503C85.2484 19.2481 89.1623 15.2912 93.9767 15.2912C98.8257 15.2912 102.74 19.2137 102.74 24.6503ZM121.963 38.2073V33.4589C121.963 33.3213 121.893 33.2525 121.755 33.2525H120.265C118.638 33.2525 117.46 32.5299 117.46 30.5686C117.46 27.0933 118.36 23.5492 119.053 19.6955C119.884 15.2567 120.716 10.2331 120.82 7.8933C121.062 2.73201 118.049 0.56427 114.343 0.56427H112.022C111.883 0.56427 111.814 0.633087 111.814 0.770722V5.34707C111.814 5.4847 111.918 5.55352 112.022 5.55352H113.234C114.447 5.55352 115.209 6.20728 115.278 7.82449C115.347 9.99223 114.62 13.4675 113.581 18.8697C112.784 23.1019 111.953 27.5406 111.953 31.6008C111.953 35.9707 114.966 38.4137 119.538 38.4137H121.755C121.893 38.4137 121.963 38.3105 121.963 38.2073ZM152.574 38.2073V11.0933C152.574 10.9557 152.505 10.8869 152.366 10.8869H147.794C147.69 10.8869 147.621 10.9557 147.586 11.0589L146.963 13.7428C146.928 13.8804 146.79 13.9148 146.686 13.8116C144.192 11.3686 140.867 10.4051 137.542 10.4051C129.264 10.4051 123.445 16.1858 123.445 24.6847C123.445 33.1492 129.298 38.8955 137.542 38.8955C140.798 38.8955 144.781 37.7256 146.686 35.489C146.824 35.3514 146.928 35.3858 146.963 35.5578L147.586 38.2417C147.621 38.3449 147.69 38.4137 147.794 38.4137H152.366C152.505 38.4137 152.574 38.3105 152.574 38.2073ZM129.402 24.6847C129.402 19.1449 133.282 15.2912 138.131 15.2912C143.153 15.2912 146.686 19.317 146.686 24.6847C146.686 30.018 143.153 34.0094 138.131 34.0094C133.316 34.0094 129.402 30.1557 129.402 24.6847ZM156.73 0.770722V38.2073C156.73 38.3449 156.799 38.4137 156.938 38.4137H161.51C161.614 38.4137 161.683 38.3449 161.718 38.2417L162.307 35.7299C162.341 35.5922 162.48 35.5234 162.584 35.6266C165.251 37.932 168.818 38.8955 171.762 38.8955C180.006 38.8955 185.859 33.1492 185.859 24.6847C185.859 16.1858 179.694 10.4051 171.416 10.4051C167.952 10.4051 165.354 11.2998 162.514 13.7084C162.376 13.846 162.272 13.7772 162.272 13.6051V0.770722C162.272 0.633087 162.168 0.56427 162.064 0.56427H156.938C156.799 0.56427 156.73 0.667496 156.73 0.770722ZM179.902 24.6847C179.902 30.0869 175.988 34.0094 171.173 34.0094C166.151 34.0094 162.618 29.9492 162.618 24.6847C162.618 19.4202 166.151 15.3256 171.173 15.3256C176.022 15.3256 179.902 19.2481 179.902 24.6847Z"
+                fill="white"
+              />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </body>
+</html>

@@ -1,92 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-    <meta name="description" content="AzureDream名人堂：记录为服务器做出杰出贡献的玩家。RManagarmr - 服务器第一位达到1000天在线时长的玩家。">
-    <meta name="theme-color" content="#000814">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>名人堂 - AzureDream</title>
-    
-    <link rel="canonical" href="https://azuredream.tech/hall-of-fame.html">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preload" href="fonts/PowerGrotesk-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="images/logo.png" as="image">
+    <link rel="preload" href="fonts/MiSans-ExtraLight.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/hall-of-fame.css">
 </head>
+
 <body>
-    <a href="#main-content" class="skip-link">跳转到主内容</a>
-    <!-- SVG Filter for Liquid Glass Effect -->
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
-        <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
-            <feTurbulence type="fractalNoise" baseFrequency="0.001 0.005" numOctaves="1" seed="17" result="turbulence" />
-            <feComponentTransfer in="turbulence" result="mapped">
-                <feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5" />
-                <feFuncG type="gamma" amplitude="0" exponent="1" offset="0" />
-                <feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5" />
-            </feComponentTransfer>
-            <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
-            <feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight">
-                <fePointLight x="-200" y="-200" z="300" />
-            </feSpecularLighting>
-            <feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage" />
-            <feDisplacementMap in="SourceGraphic" in2="softMap" scale="200" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
-    
-    <div class="blur-overlay"></div>
-    <nav class="glass-nav liquid-glass liquid-glass--static" role="navigation" aria-label="主导航">
-        <div class="nav-content">
-            <div class="logo">
-                <img src="images/logo.png" alt="AzureDream Logo" class="logo-img" width="40" height="40" decoding="async" fetchpriority="high">
-                <span>AzureDream</span>
-            </div>
-            <div class="nav-links liquidGlass-wrapper dock">
-                <a href="index.html">主页</a>
-                <a href="about.html">服务器简介</a>
-                <a href="join.html">加入方式</a>
-                <a href="hall-of-fame.html" class="active" aria-current="page">名人堂</a>
-                <a href="staff.html">管理团队</a>
-            </div>
-            <button class="menu-toggle" aria-label="切换导航菜单" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </nav>
+    <div class="pv-wrapper">
+        <div class="pv-max">
+            <div class="glass">
 
-    <main id="main-content" class="players-container" role="main">
-        <section class="players-hero animate-on-scroll liquid-glass liquid-glass--panel">
-            <h1>名人堂</h1>
-            <p class="subtitle">记录为服务器做出杰出贡献的玩家</p>
-        </section>
-
-        <section class="hall-of-fame animate-on-scroll">
-            <div class="fame-grid">
-                <div class="fame-card liquidGlass-wrapper">
-                    <div class="fame-avatar">
-                        <img src="images/staff/rmanagarmr.png" alt="RManagarmr" width="150" height="150" loading="lazy" decoding="async">
-                        <div class="fame-crown"></div>
+                <div class="header">
+                    <div class="logo-container">
+                        <img src="images/logo.png" alt="AzureDream Logo" class="logo-img">
+                        <h1 class="title" style="font-size: 24px;">AzureDream</h1>
                     </div>
-                    <h3>RManagarmr</h3>
-                    <p>服务器第一位达到1000天在线时长的玩家，也是服务器的创始人之一。</p>
+
+                    <nav class="nav-links">
+                        <a href="index.html">主页</a>
+                        <a href="about.html">简介</a>
+                        <a href="join.html">加入</a>
+                        <a href="hall-of-fame.html" class="active">名人堂</a>
+                        <a href="staff.html">团队</a>
+                    </nav>
                 </div>
+
+                <div class="hero" style="min-height: auto; padding-bottom: 20px;">
+                    <div class="hero-content">
+                        <h2>名人堂</h2>
+                        <p>记录为服务器做出杰出贡献的玩家</p>
+                    </div>
+                </div>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div class="meta">
+                            <span>Legendary · 创始人</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                            <div style="position: relative;">
+                                <img src="images/staff/rmanagarmr.png" alt="RManagarmr"
+                                    style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid gold;">
+                                <!-- Simple CSS Crown or similar could be added here if image isn't enough, relying on text for now or existing styles -->
+                            </div>
+                            <h3 style="margin: 0;">RManagarmr</h3>
+                        </div>
+                        <p class="desc">服务器第一位达到 1000 天在线时长的玩家，也是服务器的创始人之一。</p>
+                    </div>
+
+                </div>
+
+                <div class="footer">
+                    <div class="copyright">Copyright © 2025 AzureDream All rights reserved.</div>
+                    <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer" class="netlify-link">
+                        <img src="images/Netlify_logo_.svg" alt="Netlify" width="30" height="12">
+                        Powered by Netlify
+                    </a>
+                </div>
+
             </div>
-        </section>
-    </main>
-
-    <footer class="footer" role="contentinfo">
-        <div class="copyright">Copyright © 2025 AzureDream All rights reserved.</div>
-    </footer>
-
-    <div id="shader-container"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js" defer crossorigin="anonymous" integrity="sha512-qVEOwI/BtiSPoJ5JUbJLsAYIcNNUeVPQksOgNiMvDLRu5+bPWqEMbCKLjz3dOaHKw9P/RBzGj/BBnXp8LH0Cag==" referrerpolicy="no-referrer"></script>
-    <script src="js/shader.js" defer></script>
-    <script src="js/main.js" defer></script>
-    <script src="js/hall-of-fame.js" defer></script>
-    <script src="js/card-effects.js" defer></script>
+        </div>
+    </div>
 </body>
+
 </html>
