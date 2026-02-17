@@ -19,7 +19,7 @@
 - **响应式布局**: 适配所有设备尺寸
 - **多页面结构**: 完整的网站功能
 
-详细信息请查看 [AzureDream/README.md](./AzureDream/README.md)
+Tips : 我爱你Tanzeus,我爱你Suttanfix
 
 ## 快速开始
 
