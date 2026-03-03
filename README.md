@@ -11,8 +11,9 @@
 
 ## 项目结构
 
-### AzureDream/
-这是AzureDream Minecraft服务器的官方网站项目文件夹，包含了完整的网站源代码。
+- `app/`：Next.js App Router 页面（主页、简介、加入、名人堂、团队）
+- `components/`：公共组件（导航、页框、页脚、复制地址按钮）
+- `public/images`、`public/fonts`：静态资源
 
 - **现代化设计**: 采用最新的网页设计技术
 - **动态效果**: 包含动态着色器、毛玻璃效果和流畅动画
@@ -26,10 +27,22 @@ Tips : 我爱你Tanzeus,我爱你Suttanfix
 1. 克隆仓库：
    ```bash
    git clone https://github.com/Mcxiaocaibug/AzureDreamWebsite.git
-   cd AzureDreamWebsite/AzureDream
+   cd AzureDreamWebsite
    ```
 
-2. 直接在浏览器中打开 `index.html` 或部署到Web服务器
+2. 安装依赖并启动开发环境：
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+3. 打开 [http://localhost:3000](http://localhost:3000)
+
+4. 生产构建：
+   ```bash
+   npm run build
+   npm run start
+   ```
 
 ## 贡献
 

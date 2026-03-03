@@ -1,68 +1,11 @@
-# Netlify configuration for AzureDream static site
-# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
-
 [build]
-  # Pure static site: no build step is required
-  command = ""
-  # Publish directory points to the AzureDream subfolder containing the site files
-  publish = "AzureDream"
+  command = "npm run build"
 
-[dev]
-  # Make `netlify dev` serve from the same directory for local development
-  publish = "AzureDream"
+[build.environment]
+  NODE_VERSION = "22"
 
-# Performance: Enable all processing
-[build.processing]
-  skip_processing = false
-
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-[build.processing.images]
-  compress = true
-
-# Security and Performance Headers
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-
-[[headers]]
-  for = "/css/*"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    X-Content-Type-Options = "nosniff"
-
-[[headers]]
-  for = "/js/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    X-Content-Type-Options = "nosniff"
-
-[[headers]]
-  for = "/images/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    X-Content-Type-Options = "nosniff"
-
-[[headers]]
-  for = "/fonts/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    X-Content-Type-Options = "nosniff"
-    Access-Control-Allow-Origin = "*"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [[headers]]
   for = "/*"
@@ -71,33 +14,29 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "interest-cohort=(), geolocation=(), microphone=(), camera=()"
-    # Content Security Policy - adjust if needed
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-src 'none';"
-
-# Redirects for clean URLs (optional)
-[[redirects]]
-  from = "/about"
-  to = "/about.html"
-  status = 200
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
 [[redirects]]
-  from = "/join"
-  to = "/join.html"
-  status = 200
+  from = "/index.html"
+  to = "/"
+  status = 301
 
 [[redirects]]
-  from = "/staff"
-  to = "/staff.html"
-  status = 200
+  from = "/about.html"
+  to = "/about"
+  status = 301
 
 [[redirects]]
-  from = "/hall-of-fame"
-  to = "/hall-of-fame.html"
-  status = 200
+  from = "/join.html"
+  to = "/join"
+  status = 301
 
-# 404 page
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 404
+  from = "/staff.html"
+  to = "/staff"
+  status = 301
+
+[[redirects]]
+  from = "/hall-of-fame.html"
+  to = "/hall-of-fame"
+  status = 301

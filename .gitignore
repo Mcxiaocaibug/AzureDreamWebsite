@@ -20,6 +20,8 @@ vendor/
 # Build files
 dist/
 build/
+.next/
+out/
 *.min.js
 *.min.css
 
