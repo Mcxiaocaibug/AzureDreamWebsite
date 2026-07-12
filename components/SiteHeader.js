@@ -12,27 +12,32 @@ export default function SiteHeader({ active }) {
   return (
     <div className="header">
       <div className="logo-container">
-        <img src="/images/logo.png" alt="AzureDream Logo" className="logo-img" />
-        <h1 className="title" style={{ fontSize: 24 }}>
-          AzureDream
-        </h1>
+        <div className="logo-mark">
+          <img src="/images/logo.png" alt="AzureDream Logo" className="logo-img" />
+        </div>
+        <div className="brand-copy">
+          <h1 className="title">AzureDream</h1>
+          <span>AI Minecraft Server</span>
+        </div>
       </div>
 
-      <nav className="nav-links" aria-label="主导航">
-        {navItems.map((item) => {
-          const isActive = item.key === active;
-          return (
-            <Link
-              key={item.key}
-              href={item.href}
-              className={isActive ? "active" : undefined}
-              aria-current={isActive ? "page" : undefined}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
+      <div className="nav-shell">
+        <nav className="nav-links" aria-label="主导航">
+          {navItems.map((item) => {
+            const isActive = item.key === active;
+            return (
+              <Link
+                key={item.key}
+                href={item.href}
+                className={isActive ? "active" : undefined}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
     </div>
   );
 }
