@@ -5,52 +5,83 @@ import { useEffect } from "react";
 export default function MotionEffects() {
   useEffect(() => {
     const root = document.documentElement;
-    const cards = Array.from(document.querySelectorAll(".card"));
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const header = document.querySelector(".site-header");
+    const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
+    const lightStages = Array.from(document.querySelectorAll('[data-header-theme="light"]'));
+    const pointerSurfaces = Array.from(document.querySelectorAll("[data-pointer-surface]"));
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
 
-    const updatePointerGlow = (event) => {
+    const updateScrollState = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        root.style.setProperty("--pointer-x", `${event.clientX}px`);
-        root.style.setProperty("--pointer-y", `${event.clientY}px`);
+        const pageRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+        const progress = Math.min(Math.max(window.scrollY / pageRange, 0), 1);
+        const sampleY = 38;
+        const onLight = lightStages.some((stage) => {
+          const bounds = stage.getBoundingClientRect();
+          return bounds.top <= sampleY && bounds.bottom > sampleY;
+        });
+
+        root.style.setProperty("--page-progress", progress.toFixed(4));
+        header?.classList.toggle("is-scrolled", window.scrollY > 24);
+        header?.classList.toggle("is-light", onLight);
       });
     };
 
-    const cleanups = cards.map((card) => {
-      const handleMove = (event) => {
-        if (reduceMotion.matches) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10%", threshold: 0.08 }
+    );
 
-        const bounds = card.getBoundingClientRect();
+    if (reducedMotion.matches) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    } else {
+      revealItems.forEach((item) => observer.observe(item));
+    }
+
+    const pointerCleanups = pointerSurfaces.map((surface) => {
+      const handlePointer = (event) => {
+        if (reducedMotion.matches) return;
+        const bounds = surface.getBoundingClientRect();
         const x = (event.clientX - bounds.left) / bounds.width;
         const y = (event.clientY - bounds.top) / bounds.height;
-
-        card.style.setProperty("--card-x", `${x * 100}%`);
-        card.style.setProperty("--card-y", `${y * 100}%`);
-        card.style.setProperty("--rotate-x", `${(0.5 - y) * 4}deg`);
-        card.style.setProperty("--rotate-y", `${(x - 0.5) * 5}deg`);
+        surface.style.setProperty("--pointer-x", `${x * 100}%`);
+        surface.style.setProperty("--pointer-y", `${y * 100}%`);
+        surface.style.setProperty("--surface-rx", `${(0.5 - y) * 1.8}deg`);
+        surface.style.setProperty("--surface-ry", `${(x - 0.5) * 2.2}deg`);
       };
 
-      const handleLeave = () => {
-        card.style.setProperty("--rotate-x", "0deg");
-        card.style.setProperty("--rotate-y", "0deg");
+      const resetPointer = () => {
+        surface.style.setProperty("--surface-rx", "0deg");
+        surface.style.setProperty("--surface-ry", "0deg");
       };
 
-      card.addEventListener("pointermove", handleMove);
-      card.addEventListener("pointerleave", handleLeave);
-
+      surface.addEventListener("pointermove", handlePointer);
+      surface.addEventListener("pointerleave", resetPointer);
       return () => {
-        card.removeEventListener("pointermove", handleMove);
-        card.removeEventListener("pointerleave", handleLeave);
+        surface.removeEventListener("pointermove", handlePointer);
+        surface.removeEventListener("pointerleave", resetPointer);
       };
     });
 
-    window.addEventListener("pointermove", updatePointerGlow, { passive: true });
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    window.addEventListener("resize", updateScrollState, { passive: true });
 
     return () => {
       cancelAnimationFrame(frame);
-      window.removeEventListener("pointermove", updatePointerGlow);
-      cleanups.forEach((cleanup) => cleanup());
+      observer.disconnect();
+      pointerCleanups.forEach((cleanup) => cleanup());
+      window.removeEventListener("scroll", updateScrollState);
+      window.removeEventListener("resize", updateScrollState);
     };
   }, []);
 

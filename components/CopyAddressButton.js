@@ -74,7 +74,7 @@ export default function CopyAddressButton() {
 
   return (
     <>
-      <button id="copy-btn" className="btn btn-secondary" type="button" onClick={handleCopy}>
+      <button id="copy-btn" className="btn btn--ghost" type="button" onClick={handleCopy}>
         {buttonText}
       </button>
       <p className={`copy-status${isError ? " is-error" : ""}`} aria-live="polite">

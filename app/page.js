@@ -1,134 +1,107 @@
 import Link from "next/link";
+import FeatureShowcase from "../components/FeatureShowcase";
 import PageShell from "../components/PageShell";
 
 export const metadata = {
   title: "AzureDream - AI驱动的未来级Minecraft服务器",
-  description: "AzureDream - AI驱动的未来级Minecraft服务器。体验下一代游戏服务器，感受AI带来的无限可能。",
-  alternates: {
-    canonical: "/"
-  },
+  description: "AzureDream - 面向长期生存、工业生电与社区共创的 AI 驱动 Minecraft 服务器。",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "AzureDream - AI驱动的未来级Minecraft服务器",
-    description: "来自蔚蓝未来 · 体验下一代游戏服务器，感受AI带来的无限可能。",
+    description: "来自蔚蓝未来，一座由玩家与 AI 共同维护的长期 Minecraft 世界。",
     url: "/"
   },
   twitter: {
     title: "AzureDream - AI驱动的未来级Minecraft服务器",
-    description: "来自蔚蓝未来 · 体验下一代游戏服务器，感受AI带来的无限可能。"
+    description: "来自蔚蓝未来，一座由玩家与 AI 共同维护的长期 Minecraft 世界。"
   }
 };
+
+const Arrow = () => <span className="arrow" aria-hidden="true">↗</span>;
 
 export default function HomePage() {
   return (
     <PageShell
       activeNav="home"
-      heroTitle={
-        <>
-          由AI驱动的
-          <br />
-          Minecraft服务器
-        </>
-      }
-      heroSubtitle={
-        <>
-          来自蔚蓝未来 · 体验下一代游戏服务器
-          <br />
-          感受AI带来的无限可能
-        </>
-      }
+      heroTitle={<>由 AI 驱动的<br /><em>Minecraft 世界</em></>}
+      heroSubtitle={<>没有喧闹的规则堆叠，只有稳定运行的机器、长久保存的作品，<br className="desktop-break" />以及一群认真生活在方块世界里的人。</>}
       heroActions={
-        <div className="cta-buttons">
-          <Link href="/join" className="btn">
-            立即加入
-          </Link>
-          <Link href="/about" className="btn btn-secondary">
-            了解更多
-          </Link>
+        <div className="hero-actions" data-reveal style={{ "--reveal-delay": "210ms" }}>
+          <Link href="/join" className="btn">进入世界 <Arrow /></Link>
+          <Link href="/about" className="btn btn--ghost">阅读我们的故事</Link>
         </div>
       }
     >
-      <div className="card" data-card="1">
-        <div className="meta">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M12 7v5l3 1.8"
-              stroke="rgba(255,255,255,0.8)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle cx="12" cy="12" r="8" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" />
-          </svg>
-          <span>核心特性 · AI Native</span>
-        </div>
-        <h3>AI 智能管理</h3>
-        <p className="desc">采用最先进的 AI 技术辅助服务器管理，为您提供丝般顺滑的游戏体验。智能识别作弊、自动维护经济平衡。</p>
-      </div>
+      <section className="light-stage" data-header-theme="light">
+        <div className="light-wash" aria-hidden="true" />
+        <div className="shell light-stage-shell">
+          <div className="section-head light-heading" data-reveal>
+            <div>
+              <span className="label">ARRIVAL SEQUENCE</span>
+              <h2 className="section-title">三步，抵达蔚蓝世界</h2>
+            </div>
+            <p className="section-note">从认识社区到第一次踏上出生点，我们把加入过程做得简单而清晰。</p>
+          </div>
 
-      <div className="card" data-card="2">
-        <div className="meta">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
-              stroke="rgba(255,255,255,0.8)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span>性能优化 · Leaves Kernel</span>
-        </div>
-        <h3>Leaves 高性能内核</h3>
-        <p className="desc">基于 Leaves 核心深度优化，即使在红石机器高负荷运转时也能保持 TPS 稳定。告别卡顿，尽情创造。</p>
-      </div>
+          <ol className="arrival-list">
+            <li data-reveal>
+              <span className="arrival-num">1</span>
+              <div><h3>加入社区</h3><p>进入 QQ 群，与在线玩家相遇，也让我们认识你。</p></div>
+              <span className="arrival-state">974782827</span>
+            </li>
+            <li data-reveal style={{ "--reveal-delay": "70ms" }}>
+              <span className="arrival-num">2</span>
+              <div><h3>读懂共识</h3><p>了解长期存档的边界与社区约定，尊重每一份创造。</p></div>
+              <span className="arrival-state">COMMUNITY FIRST</span>
+            </li>
+            <li data-reveal style={{ "--reveal-delay": "140ms" }}>
+              <span className="arrival-num">3</span>
+              <div><h3>连接世界</h3><p>复制地址，在 Java 版多人游戏中添加 AzureDream。</p></div>
+              <Link href="/join" className="arrival-link">查看加入指南 ↗</Link>
+            </li>
+          </ol>
 
-      <div className="card" data-card="3">
-        <div className="meta">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path
-              d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
-              stroke="rgba(255,255,255,0.8)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle
-              cx="9"
-              cy="7"
-              r="4"
-              stroke="rgba(255,255,255,0.8)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M23 21v-2a4 4 0 0 0-3-3.87"
-              stroke="rgba(255,255,255,0.8)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M16 3.13a4 4 0 0 1 0 7.75"
-              stroke="rgba(255,255,255,0.8)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span>社区氛围 · Social</span>
-        </div>
-        <h3>沉浸式社交体验</h3>
-        <p className="desc">无论是生存建筑还是红石科技，在这里总能找到志同道合的伙伴。自动化与创造共存，构建属于你的蔚蓝梦想。</p>
-      </div>
+          <div className="showcase-heading" data-reveal>
+            <span className="label label--bare">WHAT LIVES INSIDE</span>
+            <h2>世界为什么值得久留</h2>
+          </div>
 
-      <div className="card" data-card="4">
-        <div className="meta">
-          <span>管理团队 · Staff</span>
+          <FeatureShowcase />
+
+          <div className="light-metrics" data-reveal>
+            <div><strong>24 / 7</strong><span>世界持续在线</span></div>
+            <div><strong>Leaves</strong><span>高性能服务端核心</span></div>
+            <div><strong>AI Native</strong><span>智能维护体系</span></div>
+            <div><strong>Long-term</strong><span>长期存档理念</span></div>
+          </div>
         </div>
-        <h3>Team AzureDream</h3>
-        <p className="desc">RManagarmr, Mcxiaocai666, Tanzeus 以及更多默默付出的贡献者。</p>
-      </div>
+      </section>
+
+      <section className="section story-section">
+        <div className="shell">
+          <div className="story-layout">
+            <div data-reveal>
+              <span className="label">A LIVING ARCHIVE</span>
+              <h2 className="section-title">每一次登录，<br />都在续写同一个世界</h2>
+            </div>
+            <div className="story-copy" data-reveal style={{ "--reveal-delay": "100ms" }}>
+              <p>在这里，效率不是为了更快毕业，而是为了有更多时间去建造、交流和发现。AI 与高性能内核藏在幕后，玩家的故事永远站在前台。</p>
+              <Link href="/hall-of-fame">翻阅世界档案 <Arrow /></Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-final">
+        <div className="shell" data-reveal>
+          <span className="label">THE WORLD IS ONLINE</span>
+          <h2>下一座地标，<br />也许由<em>你</em>建成。</h2>
+          <div className="hero-actions">
+            <Link href="/join" className="btn">立即加入 <Arrow /></Link>
+            <a href="https://qm.qq.com/q/yTFgbREpDW" className="btn btn--ghost" target="_blank" rel="noopener noreferrer">先去社区看看</a>
+          </div>
+        </div>
+      </section>
     </PageShell>
   );
 }
