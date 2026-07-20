@@ -1378,7 +1378,6 @@ body.menu-open {
   z-index: 2;
   color: #111722;
   background: #f4f6f9;
-  border-radius: 46px 46px 0 0;
   box-shadow: 0 -40px 120px rgba(94, 156, 255, 0.1);
 }
 
@@ -2015,7 +2014,6 @@ body.menu-open {
   .site-header:has(.menu-toggle.is-open) .brand-sub { color: var(--text-3); border-color: var(--line-strong); }
   .site-header:has(.menu-toggle.is-open) .menu-toggle span { background: var(--text-1); }
 
-  .light-stage { border-radius: 32px 32px 0 0; }
   .world-window { min-height: 620px; }
   .world-copy { width: min(480px, 68%); }
   .light-metrics { grid-template-columns: repeat(2, 1fr); }
@@ -2041,7 +2039,6 @@ body.menu-open {
   .hero-foot { margin-top: 64px; }
   .scroll-hint { display: none; }
 
-  .light-stage { border-radius: 24px 24px 0 0; }
   .light-stage-shell { padding-top: 76px; padding-bottom: 96px; }
   .arrival-list li { grid-template-columns: 42px 1fr; gap: 14px; padding: 20px 17px; }
   .arrival-state,
