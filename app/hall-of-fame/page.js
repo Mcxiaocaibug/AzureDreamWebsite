@@ -45,7 +45,7 @@ export default function HallOfFamePage() {
       </section>
 
       <section className="cta-final">
-        <div className="shell" data-reveal><span className="label">WRITE THE NEXT PAGE</span><h2>传奇从来不是称号，<br />而是<em>留下了什么。</em></h2><div className="hero-actions"><Link href="/join" className="btn">进入世界 <span className="arrow">↗</span></Link></div></div>
+        <div className="shell" data-reveal><span className="label label--center">Write The Next Page</span><h2 className="cta-title">传奇从来不是称号，<br />而是<em>留下了什么。</em></h2><div className="hero-actions"><Link href="/join" className="btn">进入世界 <span className="arrow">↗</span></Link></div></div>
       </section>
     </PageShell>
   );

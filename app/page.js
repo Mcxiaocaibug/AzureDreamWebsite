@@ -23,21 +23,20 @@ export default function HomePage() {
   return (
     <PageShell
       activeNav="home"
-      heroTitle={<>由 AI 驱动的<br /><em>Minecraft 世界</em></>}
-      heroSubtitle={<>没有喧闹的规则堆叠，只有稳定运行的机器、长久保存的作品，<br className="desktop-break" />以及一群认真生活在方块世界里的人。</>}
+      heroTitle={<>由 AI 驱动的<br />Minecraft 世界</>}
+      heroSubtitle="没有喧闹的规则堆叠，只有稳定运行的机器、长久保存的作品，以及一群认真生活在方块世界里的人。"
       heroActions={
-        <div className="hero-actions" data-reveal style={{ "--reveal-delay": "210ms" }}>
+        <div className="hero-actions" data-reveal style={{ "--reveal-delay": "300ms" }}>
           <Link href="/join" className="btn">进入世界 <Arrow /></Link>
           <Link href="/about" className="btn btn--ghost">阅读我们的故事</Link>
         </div>
       }
     >
-      <section className="light-stage" data-header-theme="light">
-        <div className="light-wash" aria-hidden="true" />
-        <div className="shell light-stage-shell">
-          <div className="section-head light-heading" data-reveal>
+      <section className="section">
+        <div className="shell">
+          <div className="section-head section-head--split" data-reveal>
             <div>
-              <span className="label">ARRIVAL SEQUENCE</span>
+              <span className="label">Arrival Sequence</span>
               <h2 className="section-title">三步，抵达蔚蓝世界</h2>
             </div>
             <p className="section-note">从认识社区到第一次踏上出生点，我们把加入过程做得简单而清晰。</p>
@@ -45,30 +44,43 @@ export default function HomePage() {
 
           <ol className="arrival-list">
             <li data-reveal>
-              <span className="arrival-num">1</span>
-              <div><h3>加入社区</h3><p>进入 QQ 群，与在线玩家相遇，也让我们认识你。</p></div>
+              <span className="arrival-num">01</span>
+              <div>
+                <h3>加入社区</h3>
+                <p>进入 QQ 群，与在线玩家相遇，也让我们认识你。</p>
+              </div>
               <span className="arrival-state">974782827</span>
             </li>
-            <li data-reveal style={{ "--reveal-delay": "70ms" }}>
-              <span className="arrival-num">2</span>
-              <div><h3>读懂共识</h3><p>了解长期存档的边界与社区约定，尊重每一份创造。</p></div>
-              <span className="arrival-state">COMMUNITY FIRST</span>
+            <li data-reveal style={{ "--reveal-delay": "80ms" }}>
+              <span className="arrival-num">02</span>
+              <div>
+                <h3>读懂共识</h3>
+                <p>了解长期存档的边界与社区约定，尊重每一份创造。</p>
+              </div>
+              <span className="arrival-state">Community First</span>
             </li>
-            <li data-reveal style={{ "--reveal-delay": "140ms" }}>
-              <span className="arrival-num">3</span>
-              <div><h3>连接世界</h3><p>复制地址，在 Java 版多人游戏中添加 AzureDream。</p></div>
+            <li data-reveal style={{ "--reveal-delay": "160ms" }}>
+              <span className="arrival-num">03</span>
+              <div>
+                <h3>连接世界</h3>
+                <p>复制地址，在 Java 版多人游戏中添加 AzureDream。</p>
+              </div>
               <Link href="/join" className="arrival-link">查看加入指南 ↗</Link>
             </li>
           </ol>
+        </div>
+      </section>
 
-          <div className="showcase-heading" data-reveal>
-            <span className="label label--bare">WHAT LIVES INSIDE</span>
-            <h2>世界为什么值得久留</h2>
+      <section className="section">
+        <div className="shell">
+          <div className="section-head" data-reveal>
+            <span className="label">What Lives Inside</span>
+            <h2 className="section-title">世界为什么值得久留</h2>
           </div>
 
           <FeatureShowcase />
 
-          <div className="light-metrics" data-reveal>
+          <div className="metrics" data-reveal>
             <div><strong>24 / 7</strong><span>世界持续在线</span></div>
             <div><strong>Leaves</strong><span>高性能服务端核心</span></div>
             <div><strong>AI Native</strong><span>智能维护体系</span></div>
@@ -77,14 +89,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section story-section">
+      <section className="section">
         <div className="shell">
           <div className="story-layout">
             <div data-reveal>
-              <span className="label">A LIVING ARCHIVE</span>
+              <span className="label">A Living Archive</span>
               <h2 className="section-title">每一次登录，<br />都在续写同一个世界</h2>
             </div>
-            <div className="story-copy" data-reveal style={{ "--reveal-delay": "100ms" }}>
+            <div className="story-copy" data-reveal style={{ "--reveal-delay": "120ms" }}>
               <p>在这里，效率不是为了更快毕业，而是为了有更多时间去建造、交流和发现。AI 与高性能内核藏在幕后，玩家的故事永远站在前台。</p>
               <Link href="/hall-of-fame">翻阅世界档案 <Arrow /></Link>
             </div>
@@ -94,8 +106,8 @@ export default function HomePage() {
 
       <section className="cta-final">
         <div className="shell" data-reveal>
-          <span className="label">THE WORLD IS ONLINE</span>
-          <h2>下一座地标，<br />也许由<em>你</em>建成。</h2>
+          <span className="label label--center">The World Is Online</span>
+          <h2 className="cta-title">下一座地标，<br />也许由<em>你</em>建成。</h2>
           <div className="hero-actions">
             <Link href="/join" className="btn">立即加入 <Arrow /></Link>
             <a href="https://qm.qq.com/q/yTFgbREpDW" className="btn btn--ghost" target="_blank" rel="noopener noreferrer">先去社区看看</a>

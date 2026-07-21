@@ -3,11 +3,11 @@ import SiteFooter from "./SiteFooter";
 import SiteHeader from "./SiteHeader";
 
 const heroLabels = {
-  home: "A WORLD BEYOND THE HORIZON",
-  about: "ABOUT · AZUREDREAM",
-  join: "ENTER · THE WORLD",
-  staff: "PEOPLE · BEHIND THE WORLD",
-  "hall-of-fame": "ARCHIVE · OF LEGENDS"
+  home: "AzureDream — A World Beyond The Horizon",
+  about: "About · AzureDream",
+  join: "Enter · The World",
+  staff: "People · Behind The World",
+  "hall-of-fame": "Archive · Of Legends"
 };
 
 export default function PageShell({ activeNav, heroTitle, heroSubtitle, heroActions, compactHero = false, children }) {
@@ -15,33 +15,38 @@ export default function PageShell({ activeNav, heroTitle, heroSubtitle, heroActi
     <div className="site-frame">
       <MotionEffects />
       <div className="ambient" aria-hidden="true" />
-      <div className="grain" aria-hidden="true" />
+      <div className="aurora" aria-hidden="true"><span /><span /><span /></div>
+      <div className="stars" aria-hidden="true" />
+      <div className="mist" aria-hidden="true" />
+      <div className="scroll-progress" aria-hidden="true" />
       <SiteHeader active={activeNav} />
 
       <main>
-        <section className={`hero${compactHero ? " hero--compact" : " hero--home"}`}>
+        <section className={`hero${compactHero ? " hero--compact" : ""}`}>
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="hero-horizon" aria-hidden="true" />
+
           <div className="shell hero-shell">
             <div className="hero-emblem" aria-hidden="true" data-reveal>
-              <span className="emblem-ring emblem-ring-a" />
-              <span className="emblem-ring emblem-ring-b" />
-              <span className="emblem-glow" />
-              <span className="emblem-core"><img src="/images/logo.png" alt="" /></span>
+              <img src="/images/logo.png" alt="" />
             </div>
-            <div className="label label--bare" data-reveal>{heroLabels[activeNav] || "AZUREDREAM"}</div>
-            <h1 className="hero-title" data-reveal style={{ "--reveal-delay": "80ms" }}>{heroTitle}</h1>
-            <p className="hero-sub" data-reveal style={{ "--reveal-delay": "150ms" }}>{heroSubtitle}</p>
+            <span className="label label--center" data-reveal style={{ "--reveal-delay": "60ms" }}>
+              {heroLabels[activeNav] || "AzureDream"}
+            </span>
+            <h1 className="hero-title" data-reveal style={{ "--reveal-delay": "140ms" }}>{heroTitle}</h1>
+            <p className="hero-sub" data-reveal style={{ "--reveal-delay": "220ms" }}>{heroSubtitle}</p>
             {heroActions}
-
-            {!compactHero && (
-              <div className="hero-foot" data-reveal style={{ "--reveal-delay": "240ms" }}>
-                <div className="hero-addr">
-                  <span className="dot" />
-                  JAVA · <strong>miku.click:10669</strong>
-                </div>
-                <span className="scroll-hint">SCROLL TO EXPLORE</span>
-              </div>
-            )}
           </div>
+
+          {!compactHero && (
+            <div className="hero-foot" data-reveal style={{ "--reveal-delay": "340ms" }}>
+              <div className="hero-addr">
+                <span className="dot" />
+                JAVA · <strong>miku.click:10669</strong>
+              </div>
+              <span className="scroll-hint">SCROLL</span>
+            </div>
+          )}
         </section>
 
         {children}

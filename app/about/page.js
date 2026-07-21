@@ -54,8 +54,8 @@ export default function AboutPage() {
 
       <section className="cta-final">
         <div className="shell" data-reveal>
-          <span className="label">CONTINUE THE STORY</span>
-          <h2>如果这也是你想要的世界，<br /><em>欢迎回来。</em></h2>
+          <span className="label label--center">Continue The Story</span>
+          <h2 className="cta-title">如果这也是你想要的世界，<br /><em>欢迎回来。</em></h2>
           <div className="hero-actions"><Link href="/join" className="btn">查看加入方式 <span className="arrow">↗</span></Link></div>
         </div>
       </section>

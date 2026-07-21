@@ -53,7 +53,7 @@ export default function StaffPage() {
       </section>
 
       <section className="cta-final">
-        <div className="shell" data-reveal><span className="label">JOIN THE CREW</span><h2>愿意为世界多做一点？<br /><em>和我们聊聊。</em></h2><div className="hero-actions"><a href="https://qm.qq.com/q/yTFgbREpDW" className="btn" target="_blank" rel="noopener noreferrer">加入社区 <span className="arrow">↗</span></a></div></div>
+        <div className="shell" data-reveal><span className="label label--center">Join The Crew</span><h2 className="cta-title">愿意为世界多做一点？<br /><em>和我们聊聊。</em></h2><div className="hero-actions"><a href="https://qm.qq.com/q/yTFgbREpDW" className="btn" target="_blank" rel="noopener noreferrer">加入社区 <span className="arrow">↗</span></a></div></div>
       </section>
     </PageShell>
   );

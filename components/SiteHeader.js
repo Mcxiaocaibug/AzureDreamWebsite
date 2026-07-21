@@ -25,7 +25,6 @@ export default function SiteHeader({ active }) {
           <Link href="/" className="brand" aria-label="AzureDream 首页" onClick={() => setMenuOpen(false)}>
             <img src="/images/logo.png" alt="" />
             <span className="brand-name">AZUREDREAM</span>
-            <span className="brand-sub">AI SURVIVAL</span>
           </Link>
 
           <nav className="nav desktop-nav" aria-label="主导航">
