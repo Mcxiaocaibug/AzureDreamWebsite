@@ -398,7 +398,7 @@ body.menu-open .site-header {
 .brand img {
   width: 26px;
   height: 26px;
-  border-radius: 7px;
+  border-radius: 50%;
 }
 
 .brand-name {
@@ -772,7 +772,7 @@ body.menu-open .site-header {
 .hero-emblem img {
   width: 58px;
   height: 58px;
-  border-radius: 16px;
+  border-radius: 50%;
   box-shadow: 0 0 44px rgba(116, 189, 244, 0.4);
   animation: emblem-float 7s ease-in-out infinite;
 }
@@ -1794,7 +1794,7 @@ kbd {
 .footer-brand img {
   width: 26px;
   height: 26px;
-  border-radius: 7px;
+  border-radius: 50%;
 }
 
 .footer-intro p {
