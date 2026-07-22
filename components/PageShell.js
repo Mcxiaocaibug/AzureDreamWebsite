@@ -18,6 +18,7 @@ export default function PageShell({ activeNav, heroTitle, heroSubtitle, heroActi
       <div className="aurora" aria-hidden="true"><span /><span /><span /></div>
       <div className="stars" aria-hidden="true" />
       <div className="mist" aria-hidden="true" />
+      <div className="cursor-glow" aria-hidden="true" />
       <div className="scroll-progress" aria-hidden="true" />
       <SiteHeader active={activeNav} />
 

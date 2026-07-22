@@ -22,6 +22,7 @@ export default function CopyAddressButton() {
   const [buttonText, setButtonText] = useState("复制地址");
   const [statusText, setStatusText] = useState("");
   const [isError, setIsError] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -35,12 +36,14 @@ export default function CopyAddressButton() {
     setButtonText("已复制!");
     setStatusText("服务器地址已复制到剪贴板。");
     setIsError(false);
+    setIsCopied(true);
 
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
     timeoutRef.current = setTimeout(() => {
       setButtonText("复制地址");
+      setIsCopied(false);
     }, 2000);
   };
 
@@ -74,7 +77,7 @@ export default function CopyAddressButton() {
 
   return (
     <>
-      <button id="copy-btn" className="btn btn--ghost" type="button" onClick={handleCopy}>
+      <button id="copy-btn" className={`btn btn--ghost${isCopied ? " is-copied" : ""}`} type="button" onClick={handleCopy}>
         {buttonText}
       </button>
       <p className={`copy-status${isError ? " is-error" : ""}`} aria-live="polite">
