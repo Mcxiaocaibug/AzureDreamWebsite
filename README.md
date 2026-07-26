@@ -9,11 +9,17 @@
 
 [![Powered by EdgeOne](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)](https://edgeone.ai/?from=github "Best Asian CDN, Edge, and Secure Solutions - Tencent EdgeOne")
 
+## 技术栈
+
+- **Svelte 5 + SvelteKit**：全站静态预渲染（`@sveltejs/adapter-static`），无服务端依赖
+- **自托管字体**：Noto Serif SC / JetBrains Mono 通过 `@fontsource` 按 unicode-range 分包加载，无需访问 Google Fonts
+
 ## 项目结构
 
-- `app/`：Next.js App Router 页面（主页、简介、加入、名人堂、团队）
-- `components/`：公共组件（导航、页框、页脚、复制地址按钮）
-- `public/images`、`public/fonts`：静态资源
+- `src/routes/`：页面路由（主页、简介、加入、名人堂、团队）与 robots.txt / sitemap.xml 端点
+- `src/lib/components/`：公共组件（导航、页框、页脚、动效、复制地址按钮、特色展示、SEO）
+- `src/app.css`：全站设计系统样式
+- `static/images/`：静态资源
 
 - **现代化设计**: 采用最新的网页设计技术
 - **动态效果**: 包含动态着色器、毛玻璃效果和流畅动画
@@ -36,12 +42,12 @@ Tips : 我爱你Tanzeus,我爱你Suttanfix
    npm run dev
    ```
 
-3. 打开 [http://localhost:3000](http://localhost:3000)
+3. 打开 [http://localhost:5173](http://localhost:5173)
 
-4. 生产构建：
+4. 生产构建与本地预览：
    ```bash
    npm run build
-   npm run start
+   npm run preview
    ```
 
 ## 贡献

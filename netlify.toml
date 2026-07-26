@@ -1,12 +1,9 @@
 [build]
   command = "npm run build"
-  publish = ".next"
+  publish = "build"
 
 [build.environment]
   NODE_VERSION = "22"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
 
 [[headers]]
   for = "/*"
@@ -17,27 +14,37 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
 
+[[headers]]
+  for = "/_app/immutable/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[redirects]]
   from = "/index.html"
   to = "/"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/about.html"
   to = "/about"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/join.html"
   to = "/join"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/staff.html"
   to = "/staff"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/hall-of-fame.html"
   to = "/hall-of-fame"
   status = 301
+  force = true

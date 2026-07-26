@@ -20,7 +20,7 @@ vendor/
 # Build files
 dist/
 build/
-.next/
+.svelte-kit/
 out/
 *.min.js
 *.min.css
